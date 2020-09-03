@@ -9,6 +9,7 @@ import { Connector } from "./lib/connector"
 import { SchwoererParameter } from "./lib/schwoerer/parameters"
 import { timingSafeEqual } from "crypto";
 import { STATUS_CODES } from "http";
+import { exit } from "process";
 
 
 // Augment the adapter.config object with the actual types
@@ -104,6 +105,7 @@ export class SchwoererVentcube extends utils.Adapter {
 		this.connector.connect();
 	} catch (error) {
 		this.log.error(error.message);
+		Promise.reject(error.message);
 	}
 		
 	}
