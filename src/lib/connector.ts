@@ -105,13 +105,13 @@ export class Connector {
 
     
     public writeDataToRegister(func: string, register: number, value: number) {
-        this.context.log.info('Changing register ' + register + ' value to: ' + value + "|" + value.toString(16));
+        this.context.log.debug('Changing register ' + register + ' value to: ' + value + "|" + value.toString(16));
         //Convert value from decimal to hexadecimal to write it to register
         this.client.writeMultipleRegisters(register, [value.toString(16)])
             .then(({ metrics, request, response }: any) => {
-                this.context.log.info('Transfer Time: ' + metrics.transferTime);
-                this.context.log.info('Response Function Code: ' + response.body.fc);
-                
+                this.context.log.silly('Transfer Time: ' + metrics.transferTime);
+                this.context.log.silly('Response Function Code: ' + response.body.fc);
+
                 this.context.syncReadData(func, value, new Date());
             })
             .catch((error:any) => {
@@ -124,6 +124,7 @@ export class Connector {
     }
 
     public close() {
+        this.context.log.info("Shutting down connection.");
         this.socket.end();
     }
 }

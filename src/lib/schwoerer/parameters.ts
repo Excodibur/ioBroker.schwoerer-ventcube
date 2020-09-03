@@ -25,7 +25,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -38,7 +38,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -51,7 +51,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -64,7 +64,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -77,7 +77,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -90,7 +90,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -103,7 +103,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -116,7 +116,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -129,7 +129,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -142,7 +142,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -155,7 +155,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 
@@ -168,7 +168,7 @@ export let SchwoererParameter: { [index: string]: any } =
         value_def: {
             min: -50,
             max: 100,
-            unit: "C"
+            unit: "°C"
         }
     },
 

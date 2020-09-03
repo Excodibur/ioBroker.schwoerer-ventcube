@@ -57,29 +57,23 @@ export class SchwoererVentcube extends utils.Adapter {
 			let mayRead = attributes.modbus_r > -1 ? true : false;
 			let mayWrite = attributes.modbus_w > -1 ? true : false;
 
-			//Setup a "value" object where the parsed target data is stored
+			//Prepare common section for object
+			var commonSettings : ioBroker.StateCommon = {
+				name: attributes.descr,
+				type: "string",
+				role: "value",
+				read: mayRead,
+				write: mayWrite,
+			};
+
+			//Add some optional parameters to config
+			(attributes.value_def.unit) && (commonSettings.unit = attributes.value_def.unit);
+			(attributes.value_type == "choice") && ( commonSettings.states = attributes.value_def);
+			(attributes.value_type == "range") && ( commonSettings.min = attributes.value_def.min) && ( commonSettings.max = attributes.value_def.max);
+
 		    await this.setObjectAsync("parameters." + func, {
 				type: "state",
-				common: {
-					name: attributes.descr,
-					type: "string",
-					role: "value",
-					read: mayRead,
-					write: mayWrite
-				},
-				native: {},
-			});
-
-			//Setup a "value_raw" object where the raw target data is stored
-		    await this.setObjectAsync("parametersRaw." + func, {
-				type: "state",
-				common: {
-					name: attributes.descr,
-					type: "string",
-					role: "value",
-					read: mayRead,
-					write: mayWrite
-				},
+				common: commonSettings,
 				native: {},
 			});
 
@@ -101,10 +95,6 @@ export class SchwoererVentcube extends utils.Adapter {
 
 		// In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
 		this.subscribeStates("*");
-		// You can also add a subscription for multiple states. The following line watches all states starting with "lights."
-		// this.subscribeStates("lights.*");
-		// Or, if you really must, you can also watch all states. Don't do this if you don't need to. Otherwise this will cause a lot of unnecessary load on the system:
-		// this.subscribeStates("*");
 
 		this.log.info("Starting connector");
 		this.connector = new Connector(this, this.config.server, this.config.port, this.config.interval);
@@ -127,33 +117,19 @@ export class SchwoererVentcube extends utils.Adapter {
 		var parameterParsed: string = value;
 		var parameterType = SchwoererParameter[func].value_type;
 		switch(parameterType) {
-			case "choice":
+			/*case "choice":
 					parameterParsed = SchwoererParameter[func].value_def[value];
-				break;
+				break;*/
 			case "range":
 				var unit = SchwoererParameter[func].value_def.unit;
 				switch(unit){
-					case "C":
-						parameterParsed = value.toString().replace(/(\d{2})(\d)/, "$1.$2 °C");
-						break;
-					case "min":
-						parameterParsed = value + " min";
-						break;
-					case "days":
-						parameterParsed = value + " Tage";
-						break;
-					case "%":
-						parameterParsed = value + " %";
-						break;
-					case "rpm":
-						parameterParsed = value + " RPM";
+					case "°C":
+						parameterParsed = value.toString().replace(/(\d{2})(\d)/, "$1.$2");
 						break;
 				}
 				break;
 		}
-
 		this.setState("parameters." + func, {val: parameterParsed, ack: true, c: "update"});
-		this.setState("parametersRaw." + func, {val: value, ack: true, c: "update"});
 		this.setState("lastUpdate." + func, {val: time.toString(), ack: true, c: "update"});
 	}
 
@@ -162,11 +138,7 @@ export class SchwoererVentcube extends utils.Adapter {
 	 */
 	private onUnload(callback: () => void): void {
 		try {
-			// Here you must clear all timeouts or intervals that may still be active
-			// clearTimeout(timeout1);
-			// clearTimeout(timeout2);
-			// ...
-			// clearInterval(interval1);
+			//Terminate MODBUS connection
 			this.connector.close();
 			callback();
 		} catch (e) {
@@ -184,11 +156,10 @@ export class SchwoererVentcube extends utils.Adapter {
 
 			//Only react to manual state changes
 			if (state.ack == false) {
-				this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
+				this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 				
-				var folder = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, "$1");
 				var func = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, "$2");
-				this.performManualStateChange(folder, func, state.val);
+				this.performManualStateChange(func, state.val);
 			}
 		} else {
 			// The state was deleted
@@ -196,12 +167,8 @@ export class SchwoererVentcube extends utils.Adapter {
 		}
 	}
 
-	private performManualStateChange(folder: string, func: string, value: any){
-		this.log.info("Folder: " + folder + " Function: " + func + " Value: " + value);
-
-		//Validate that set value is allowed
-		// TODO complicated, as structure differes between type choice and range
-
+	private performManualStateChange(func: string, value: any){
+		//Value validation not needed, as ObjectState has all allowed values already configured.
 		var writeRegister = SchwoererParameter[func].modbus_w;
 		this.connector.writeDataToRegister(func,writeRegister,parseInt(value));
 	}

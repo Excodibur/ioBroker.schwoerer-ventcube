@@ -45,5 +45,9 @@ systemDictionary = {
 	"port": {
 		"en": "Port",
 		"de": "Port"
+	},
+	"interval": {
+		"en": "Refresh Interval",
+		"de": "Aktualisierungs Interval"
 	}
 };

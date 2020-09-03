@@ -12,12 +12,38 @@
 
 ## schwoerer-ventcube adapter for ioBroker
 
-Adapter for Schwoererhaus Ventcube system
+Adapter for Schwoererhaus Ventcube system. More information about Ventcube Fresh can be found [here](https://www.bauinfocenter.de/lueftung/lueftungsanlagen/).
+
+Disclaimer: This adapter is neither developed nor officially supported by the company [Schwoererhaus KG](https://www.schwoererhaus.de/) which distributes the Ventcube systems. Instructions should be followed with care and at your own risk.
+
+### Preconditions
+In order to access the network-interface of Ventcube the following (known) preconditions need to be met:
+- The Ventcube needs to be connected to you internal network (usually via standard RJ45-cable)
+- Modbus TCP interface needs to be supported (Control-Panel: >= V1.05, VentCube: >= V02.11) and usally has to be enabled manually first
+    * On Control Panel login to "Service" section (use standard password from docs)
+	* In Basic Settings check that Network Connection is established and "9. Network Interface" and "10. Modbus TCP" are both active.
+	* If the last two settings are not active, activate them and restart the Ventcube (e.g. by cutting the power temporarily)
+
+### Configuration parameters
+Depending on the building-specific Ventcube setup not all parameters that can be retrieved from or changed via the Ventcube interface will be used. Each parameter in the "parameters" folder goes side-by-side with an entry in the "lastUpdate" folder that indicates the last fetch timestamp for each parameter.
+
+Currently not all parameters that can be retrieved by the Ventcube interface are provided by the adapter due to limited information regarding their purpose. They might be added to the adapter in the future though.
+
+#### Most interesting parameters
+- Betriebsart, changeable
+- Stoßlüftung (30 minute level 4 air burst), changeable
+- Innentemperatur
+- T10 Außentemperator
+
+### Reference system
+The ioBroker adapter was tested sucessfully with:
+
+| Control Panel | Ventcube | Modbus specification              |
+|---------------|----------|-----------------------------------|
+| V01.10        | V02.26   | Parameterliste_Modbus_TCP_03.2020 |
 
 ## Developer manual
 This section is intended for the developer. It can be deleted later
-
-TODO
 
 ### Best Practices
 We've collected some [best practices](https://github.com/ioBroker/ioBroker.repositories#development-and-coding-best-practices) regarding ioBroker development and coding in general. If you're new to ioBroker or Node.js, you should
@@ -70,7 +96,7 @@ For later updates, the above procedure is not necessary. Just do the following:
 
 ## Changelog
 
-### 0.0.1
+### 1.0.0
 * (Excodibur) initial release
 
 ## License
