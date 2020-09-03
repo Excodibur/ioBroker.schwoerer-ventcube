@@ -1,0 +1,77 @@
+{
+	"common": {
+		"name": "schwoerer-ventcube",
+		"version": "0.0.1",
+		"news": {
+			"0.0.1": {
+				"en": "initial release",
+				"de": "Erstveröffentlichung",
+				"ru": "Начальная версия",
+				"pt": "lançamento inicial",
+				"nl": "Eerste uitgave",
+				"fr": "Première version",
+				"it": "Versione iniziale",
+				"es": "Versión inicial",
+				"pl": "Pierwsze wydanie",
+				"zh-cn": "首次出版"
+			}
+		},
+		"title": "Schwoerer Ventcube",
+		"titleLang": {
+			"en": "Schwoerer Ventcube",
+			"de": "Schwoerer Ventcube",
+			"ru": "Schwoerer Ventcube",
+			"pt": "Schwoerer Ventcube",
+			"nl": "Schwoerer Ventcube",
+			"fr": "Schwoerer Ventcube",
+			"it": "Schwoerer Ventcube",
+			"es": "Schwoerer Ventcube",
+			"pl": "Schwoerer Ventcube",
+			"zh-cn": "Schwoerer Ventcube"
+		},
+		"desc": {
+			"en": "Adapter for Schwoererhaus Ventcube system",
+			"de": "Adapter für Schwoererhaus Ventcube System",
+			"ru": "Адаптер для системы Schwoererhaus Ventcube",
+			"pt": "Adaptador para sistema Schwoererhaus Ventcube",
+			"nl": "Adapter voor Schwoererhaus Ventcube-systeem",
+			"fr": "Adaptateur pour système Schwoererhaus Ventcube",
+			"it": "Adattatore per sistema Schwoererhaus Ventcube",
+			"es": "Adaptador para sistema Schwoererhaus Ventcube",
+			"pl": "Adapter do systemu Schwoererhaus Ventcube",
+			"zh-cn": "Schwoererhaus Ventcube系统适配器"
+		},
+		"authors": [
+			"Excodibur <excodibur@posteo.de>"
+		],
+		"keywords": [
+			"Schwoererhaus"
+		],
+		"license": "MIT",
+		"platform": "Javascript/Node.js",
+		"main": "build/main.js",
+		"icon": "schwoerer-ventcube.png",
+		"enabled": true,
+		"extIcon": "https://raw.githubusercontent.com/Excodibur/ioBroker.schwoerer-ventcube/master/admin/schwoerer-ventcube.png",
+		"readme": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/master/README.md",
+		"loglevel": "info",
+		"mode": "daemon",
+		"type": "climate-control",
+		"compact": true,
+		"connectionType": "local",
+		"dataSource": "poll",
+		"materialize": true,
+		"dependencies": [
+			{
+				"js-controller": ">=1.4.2"
+			}
+		]
+	},
+	"native": {
+		"server" : "HERMES-LT",
+		"port": 502,
+		"interval": 30
+	},
+	"objects": [],
+	"instanceObjects": []
+}

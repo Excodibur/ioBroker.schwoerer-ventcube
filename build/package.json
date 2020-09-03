@@ -1,0 +1,71 @@
+{
+  "name": "iobroker.schwoerer-ventcube",
+  "version": "0.0.1",
+  "description": "Adapter for Schwoererhaus Ventcube system",
+  "author": {
+    "name": "Excodibur",
+    "email": "excodibur@posteo.de"
+  },
+  "contributors": [
+    {
+      "name": "LightYarn"
+    }
+  ],
+  "homepage": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube",
+  "license": "MIT",
+  "keywords": [
+    "Schwoererhaus"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube"
+  },
+  "dependencies": {
+    "@iobroker/adapter-core": "^2.4.0",
+    "jsmodbus": "^4.0.4"
+  },
+  "devDependencies": {
+    "@iobroker/testing": "^2.2.0",
+    "@types/chai": "^4.2.12",
+    "@types/chai-as-promised": "^7.1.3",
+    "@types/gulp": "^4.0.6",
+    "@types/mocha": "^8.0.1",
+    "@types/node": "^14.0.27",
+    "@types/proxyquire": "^1.3.28",
+    "@types/sinon": "^9.0.4",
+    "@types/sinon-chai": "^3.2.4",
+    "@typescript-eslint/eslint-plugin": "^3.8.0",
+    "@typescript-eslint/parser": "^3.8.0",
+    "axios": "^0.19.2",
+    "chai": "^4.2.0",
+    "chai-as-promised": "^7.1.1",
+    "eslint": "^7.6.0",
+    "gulp": "^4.0.2",
+    "mocha": "^8.1.1",
+    "proxyquire": "^2.1.3",
+    "rimraf": "^3.0.2",
+    "sinon": "^9.0.2",
+    "sinon-chai": "^3.5.0",
+    "source-map-support": "^0.5.19",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7"
+  },
+  "main": "build/main.js",
+  "scripts": {
+    "prebuild": "rimraf ./build",
+    "build:ts": "tsc -p tsconfig.build.json",
+    "build": "npm run build:ts",
+    "watch:ts": "tsc -p tsconfig.build.json --watch",
+    "watch": "npm run watch:ts",
+    "test:ts": "mocha --opts test/mocha.custom.opts",
+    "test:package": "mocha test/package --exit",
+    "test:unit": "mocha test/unit --exit",
+    "test:integration": "mocha test/integration --exit",
+    "test": "npm run test:ts && npm run test:package",
+    "lint": "eslint --ext .ts src"
+  },
+  "bugs": {
+    "url": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues"
+  },
+  "readmeFilename": "README.md"
+}
