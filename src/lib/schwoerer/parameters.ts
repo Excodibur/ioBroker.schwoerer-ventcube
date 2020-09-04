@@ -246,6 +246,19 @@ export let SchwoererParameter: { [index: string]: any } =
         }
     },
 
+    "devicefilter-polluted":
+    {
+        descr: "Gerätefilter verschmutzt",
+        modbus_r: 245,
+        modbus_w: -1,
+        value_type: "choice",
+        value_def:
+        {
+            0: "nein",
+            1: "ja"
+        }
+    },
+
     "priorfilter-expiration":
     {
         descr: "Restlauzeit Vorgelagerter Filter",
@@ -256,6 +269,19 @@ export let SchwoererParameter: { [index: string]: any } =
             min: 0,
             max: 255,
             unit: "days"
+        }
+    },
+
+    "priorfilter-polluted":
+    {
+        descr: "Vorgelagerter Filter verschmutzt",
+        modbus_r: 246,
+        modbus_w: -1,
+        value_type: "choice",
+        value_def:
+        {
+            0: "nein",
+            1: "ja"
         }
     },
 
@@ -337,4 +363,69 @@ export let SchwoererParameter: { [index: string]: any } =
             1: "offen"
         }
     },
+
+    "ermergency-mode":
+    {
+        descr: "Notbetrieb aktiv",
+        modbus_r: 253,
+        modbus_w: -1,
+        value_type: "choice",
+        value_def:
+        {
+            0: "inaktiv",
+            1: "aktiv"
+        }
+    },
+
+    "air-outside-too-cold":
+    {
+        descr: "Zuluft zu kalt",
+        modbus_r: 254,
+        modbus_w: -1,
+        value_type: "choice",
+        value_def:
+        {
+            0: "inaktiv",
+            1: "aktiv"
+        }
+    },
+
+    "error-message":
+    {
+        descr: "Fehlermeldung",
+        modbus_r: 240,
+        modbus_w: -1,
+        value_type: "choice",
+        value_def:
+        {
+            0: "Kein Fehler",
+            257: "Drehzahl Zuluf fehlt",
+            258: "Drehzahl Abluft fehlt",
+            259: "Ventilator Zuluft Mindestdrehzahl nicht erreicht",
+            260: "Ventilator Abluft Mindestdrehzahl nicht erreicht",
+            261: "Ventilator Zuluft max. Drehzahl überschritten",
+            262: "Ventilator Abluft max. Drehzahl überschritten",
+            513: "Kommunikationsfehler zur BDE",
+            514: "Kommunikationsfehler Nebenbedieneinheit",
+            515: "Kommunikationsfehler Heizmodul",
+            516: "Kommunikationsfehler Sensor",
+            517: "Kommunikationsfehler Sensor-Adapter",
+            518: "Kommunikation Empfänger",
+            770: "Fehler Sensorelement T1-nach-Ewt",
+            771: "Fehler Sensorelement T2-nach-Vhr",
+            772: "Fehler Sensorelement T3-vor-Nhr",
+            773: "Fehler Sensorelement T4-nach-Nhr",
+            774: "Fehler Sensorelement T5-Abluft",
+            775: "Fehler Sensorelement T6-im-WT",
+            776: "Fehler Sensorelement T7-Verdampfer",
+            777: "Fehler Sensorelement T8-Kondensator",
+            779: "Fehler Sensorelement T10-Außentemperatur",
+            1025: "Fehler Parameterspeicher",
+            1026: "Fehler System-Bus",
+            1281: "Wärmepumpe Hochdruck",
+            1282: "Wärmepumpe Niederdruck",
+            1283: "Maximal Abtauzeit überschritten",
+            1284: "Wärmepumpe Niederdruck im Kühlbetrieb"
+        }
+    }
 }

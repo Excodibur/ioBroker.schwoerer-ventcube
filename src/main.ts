@@ -170,6 +170,12 @@ export class SchwoererVentcube extends utils.Adapter {
 	}
 
 	private performManualStateChange(func: string, value: any){
+		//Apparently temperatures (°C) are stored as 3 digit numbers in Ventcube, but as we parse them
+		//like xxx => xx.x °C we need to reverse this before updating
+		var unit = SchwoererParameter[func].value_def.unit;
+		if ((unit != undefined) && (unit == "°C")) {
+			value = value.toString().replace(/^(\d{2})\.(\d)$/, "$1$2");
+		}
 		//Value validation not needed, as ObjectState has all allowed values already configured.
 		var writeRegister = SchwoererParameter[func].modbus_w;
 		this.connector.writeDataToRegister(func,writeRegister,parseInt(value));

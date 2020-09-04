@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "schwoerer-ventcube",
-		"version": "1.0.0",
+		"version": "1.0.1",
 		"news": {
 			"0.0.1": {
 				"en": "initial release",

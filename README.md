@@ -7,6 +7,7 @@
 ![Number of Installations (stable)](http://iobroker.live/badges/schwoerer-ventcube-stable.svg)
 [![Dependency Status](https://img.shields.io/david/Excodibur/iobroker.schwoerer-ventcube.svg)](https://david-dm.org/Excodibur/iobroker.schwoerer-ventcube)
 [![Known Vulnerabilities](https://snyk.io/test/github/Excodibur/ioBroker.schwoerer-ventcube/badge.svg)](https://snyk.io/test/github/Excodibur/ioBroker.schwoerer-ventcube)
+[![Travis-CI](http://img.shields.io/travis/excodibur/ioBroker.schwoerer-ventcube/master.svg)](https://travis-ci.org/Excodibur/ioBroker.schwoerer-ventcube)
 
 [![NPM](https://nodei.co/npm/iobroker.schwoerer-ventcube.png?downloads=true)](https://nodei.co/npm/iobroker.schwoerer-ventcube/)
 
@@ -14,7 +15,7 @@
 
 Adapter for Schwoererhaus Ventcube system. More information about Ventcube Fresh can be found [here](https://www.bauinfocenter.de/lueftung/lueftungsanlagen/).
 
-Disclaimer: This adapter is neither developed nor officially supported by the company [Schwoererhaus KG](https://www.schwoererhaus.de/) which distributes the Ventcube systems. Instructions should be followed with care and at your own risk.
+**Disclaimer**: This adapter is neither developed nor officially supported by the company [Schwoererhaus KG](https://www.schwoererhaus.de/) which distributes the Ventcube systems. Instructions should be followed with care and at your own risk.
 
 ### Preconditions
 In order to access the network-interface of Ventcube the following (known) preconditions need to be met:
@@ -42,59 +43,11 @@ The ioBroker adapter was tested sucessfully with:
 |---------------|----------|-----------------------------------|
 | V01.10        | V02.26   | Parameterliste_Modbus_TCP_03.2020 |
 
-## Developer manual
-This section is intended for the developer. It can be deleted later
-
-### Best Practices
-We've collected some [best practices](https://github.com/ioBroker/ioBroker.repositories#development-and-coding-best-practices) regarding ioBroker development and coding in general. If you're new to ioBroker or Node.js, you should
-check them out. If you're already experienced, you should also take a look at them - you might learn something new :)
-
-### Scripts in `package.json`
-Several npm scripts are predefined for your convenience. You can run them using `npm run <scriptname>`
-| Script name | Description                                              |
-|-------------|----------------------------------------------------------|
-| `build`    | Re-compile the TypeScript sources.                       |
-| `watch`     | Re-compile the TypeScript sources and watch for changes. |
-| `test:ts`   | Executes the tests you defined in `*.test.ts` files.     |
-| `test:package`    | Ensures your `package.json` and `io-package.json` are valid. |
-| `test:unit`       | Tests the adapter startup with unit tests (fast, but might require module mocks to work). |
-| `test:integration`| Tests the adapter startup with an actual instance of ioBroker. |
-| `test` | Performs a minimal test run on package files and your tests. |
-| `lint` | Runs `ESLint` to check your code for formatting errors and potential bugs. |
-
-### Writing tests
-When done right, testing code is invaluable, because it gives you the 
-confidence to change your code while knowing exactly if and when 
-something breaks. A good read on the topic of test-driven development 
-is https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92. 
-Although writing tests before the code might seem strange at first, but it has very 
-clear upsides.
-
-The template provides you with basic tests for the adapter startup and package files.
-It is recommended that you add your own tests into the mix.
-
-### Publishing the adapter
-To get your adapter released in ioBroker, please refer to the documentation 
-of [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories#requirements-for-adapter-to-get-added-to-the-latest-repository).
-
-### Test the adapter manually on a local ioBroker installation
-In order to install the adapter locally without publishing, the following steps are recommended:
-1. Create a tarball from your dev directory:  
-	```bash
-	npm pack
-	```
-1. Upload the resulting file to your ioBroker host
-1. Install it locally (The paths are different on Windows):
-	```bash
-	cd /opt/iobroker
-	npm i /path/to/tarball.tgz
-	```
-
-For later updates, the above procedure is not necessary. Just do the following:
-1. Overwrite the changed files in the adapter directory (`/opt/iobroker/node_modules/iobroker.schwoerer-ventcube`)
-1. Execute `iobroker upload schwoerer-ventcube` on the ioBroker host
-
 ## Changelog
+
+### 1.0.1
+* (Excodibur) Bugfixes to adapter startup
+* (Excodibur) Added additional parameters to retrieval list
 
 ### 1.0.0
 * (Excodibur) initial release
