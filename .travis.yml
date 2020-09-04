@@ -4,12 +4,11 @@ os:
   - windows
 language: node_js
 node_js:
-  - '8'
   - '10'
   - '12'
   - '14'
 env:
-  - CXX=g++-4.8
+  - CXX=g++-6
 addons:
   apt:
     sources:
@@ -28,4 +27,6 @@ script:
   - 'npm run build'
   - 'npm run test:unit'
   - 'export DEBUG=testing:*'
-  - 'npm run test:integration'
+# As the adapter requires a running Ventcube server in the local network, it does not make sense to run integration tests.
+# Startup will fail, as the server is simply not reachable in Travis-CI env.
+# - 'npm run test:integration'
