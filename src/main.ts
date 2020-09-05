@@ -22,6 +22,7 @@ declare global {
 			server: string;
 			port: number;
 			interval: number;
+			advancedfunctions: boolean;
 		}
 	}
 }
@@ -49,10 +50,14 @@ export class SchwoererVentcube extends utils.Adapter {
 		this.log.debug("config server: " + this.config.server);
 		this.log.debug("config port: " + this.config.port);
 		this.log.debug("config interval: " + this.config.interval);
+		this.log.debug("config advancedfunctions: " + this.config.advancedfunctions);
 
 		//Setup state objects for Schwoerer parameters
 		for (const [func, attributes] of Object.entries(SchwoererParameter))
 		{
+			//Potentially skip parameters marked as "advanced"
+			if ((attributes.category == "advanced") && (! this.config.advancedfunctions)) continue;
+
 			this.log.info("Setting up state for " + func);
 
 			let mayRead = attributes.modbus_r > -1 ? true : false;
@@ -61,16 +66,19 @@ export class SchwoererVentcube extends utils.Adapter {
 			//Prepare common section for object
 			var commonSettings : ioBroker.StateCommon = {
 				name: attributes.descr,
-				type: "string",
+				type: "number",
 				role: "value",
 				read: mayRead,
 				write: mayWrite,
 			};
 
 			//Add some optional parameters to config
-			(attributes.value_def.unit) && (commonSettings.unit = attributes.value_def.unit);
-			(attributes.value_type == "choice") && ( commonSettings.states = attributes.value_def);
-			(attributes.value_type == "range") && ( commonSettings.min = attributes.value_def.min) && ( commonSettings.max = attributes.value_def.max);
+			if (attributes.value_def.unit) commonSettings.unit = attributes.value_def.unit;
+			if (attributes.value_type == "choice") commonSettings.states = attributes.value_def;
+			if (attributes.value_type == "range") {
+				commonSettings.min = attributes.value_def.min;
+				commonSettings.max = attributes.value_def.max;
+			}
 
 		    await this.setObjectAsync("parameters." + func, {
 				type: "state",
@@ -98,7 +106,7 @@ export class SchwoererVentcube extends utils.Adapter {
 		this.subscribeStates("*");
 
 		this.log.info("Starting connector");
-		this.connector = new Connector(this, this.config.server, this.config.port, this.config.interval);
+		this.connector = new Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval);
 		this.connector.initializeSocket();
 
 		this.log.debug("Connecting");
@@ -126,7 +134,7 @@ export class SchwoererVentcube extends utils.Adapter {
 				var unit = SchwoererParameter[func].value_def.unit;
 				switch(unit){
 					case "°C":
-						parameterParsed = value.toString().replace(/(\d{2})(\d)/, "$1.$2");
+						parameterParsed = (value / 10).toString();
 						break;
 				}
 				break;
@@ -174,7 +182,7 @@ export class SchwoererVentcube extends utils.Adapter {
 		//like xxx => xx.x °C we need to reverse this before updating
 		var unit = SchwoererParameter[func].value_def.unit;
 		if ((unit != undefined) && (unit == "°C")) {
-			value = value.toString().replace(/^(\d{2})\.(\d)$/, "$1$2");
+			value = value * 10;
 		}
 		//Value validation not needed, as ObjectState has all allowed values already configured.
 		var writeRegister = SchwoererParameter[func].modbus_w;

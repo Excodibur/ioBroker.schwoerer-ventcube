@@ -28,12 +28,12 @@ In order to access the network-interface of Ventcube the following (known) preco
 ### Configuration parameters
 Depending on the building-specific Ventcube setup not all parameters that can be retrieved from or changed via the Ventcube interface will be used. Each parameter in the "parameters" folder goes side-by-side with an entry in the "lastUpdate" folder that indicates the last fetch timestamp for each parameter.
 
-Currently not all parameters that can be retrieved by the Ventcube interface are provided by the adapter due to limited information regarding their purpose. They might be added to the adapter in the future though.
+All parameters mentioned in the specification referenced below were added to the adapter and can be accessed via ***Advanced Functions*** option that is configurable during adapter deployment. Enabling this option will cause the adapter to periodically retrieve data for 100+ parameters, of which most might not be used in common households. Test scope was limited to ***Basic Functions*** (enabled by default).
 
 #### Most interesting parameters
 - Betriebsart, changeable
 - Stoßlüftung (30 minute level 4 air burst), changeable
-- Innentemperatur
+- Ist Temp Raum 1 (temperature inside house)
 - T10 Außentemperator
 
 ### Reference system
@@ -44,6 +44,10 @@ The ioBroker adapter was tested sucessfully with:
 | V01.10        | V02.26   | Parameterliste_Modbus_TCP_03.2020 |
 
 ## Changelog
+
+### 1.1.0
+* (Excodibur) Multiple small fixes to fulfill ioBroker adapter requirements
+* (Excodibur) **New Option** ***Advanced Functions***: The adapter was extended to retrieve status for all known functions of Ventcube system. This includes 100+ new fields that include features of Ventcube like heating, cooling, etc.
 
 ### 1.0.1
 * (Excodibur) Bugfixes to adapter startup

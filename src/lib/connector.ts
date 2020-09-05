@@ -13,12 +13,14 @@ export class Connector {
     private port: number;
     private context: SchwoererVentcube;
     private readInterval: number; //seconds
+    private useAdvancedFunctions: boolean;
     private connectionStatus = Connector.State.DISCONNECTED;
 
-    public constructor(ventcube: SchwoererVentcube, server: string, port: number, interval: number = 30) {
+    public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number = 30) {
         this.server = server;
         this.port = port;
         this.readInterval = interval;
+        this.useAdvancedFunctions = useAdvancedFunctions;
 
         this.socket = new Socket();
         this.client = new Modbus.client.TCP(this.socket);
@@ -78,6 +80,9 @@ export class Connector {
 
         for (const [func, attributes] of Object.entries(SchwoererParameter))
         {
+            //Check if advanced functions should be retrieved as well
+            if ((attributes.category == "advanced") && (! this.useAdvancedFunctions)) continue;
+
             let mayRead = attributes.modbus_r > -1 ? true : false;
 			if (mayRead) {
                 this.context.log.debug("checking state: "+ func +":" + attributes.modbus_r);
