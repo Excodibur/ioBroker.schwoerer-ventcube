@@ -1,9 +1,8 @@
 ## Developer manual
 This section is intended for the developer.
 
-### Best Practices
-We've collected some [best practices](https://github.com/ioBroker/ioBroker.repositories#development-and-coding-best-practices) regarding ioBroker development and coding in general. If you're new to ioBroker or Node.js, you should
-check them out. If you're already experienced, you should also take a look at them - you might learn something new :)
+### Modifying adapter code
+**Never** change any JS-files in ***build***-folder manually. Always perform modifications on TypeScript (.ts) files in src folder and run `npm run build` command to regenarte JS files. The ***build***-folder was only added to the repository files to satisfy some checks made by [https://github.com/ioBroker/ioBroker.repochecker].
 
 ### Scripts in `package.json`
 Several npm scripts are predefined for your convenience. You can run them using `npm run <scriptname>`

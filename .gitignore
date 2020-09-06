@@ -6,7 +6,8 @@ nbproject
 .vscode
 
 #Build folder
-build
+#-Apparently built JS files are also needed or else ioBroker Adapter checker will complain
+#build
 
 # Sourcemaps
 maps/

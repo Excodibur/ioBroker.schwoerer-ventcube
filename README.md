@@ -15,7 +15,7 @@
 
 Adapter for Schwoererhaus Ventcube system. More information about Ventcube Fresh can be found [here](https://www.bauinfocenter.de/lueftung/lueftungsanlagen/).
 
-**Disclaimer**: This adapter is neither developed nor officially supported by the company [Schwoererhaus KG](https://www.schwoererhaus.de/) which distributes the Ventcube systems. Instructions should be followed with care and at your own risk.
+**Disclaimer**: This adapter is neither developed nor officially supported by the company [Schwoererhaus KG](https://www.schwoererhaus.de/) which distributes the Ventcube system. Instructions should be followed with care and at your own risk.
 
 ### Preconditions
 In order to access the network-interface of Ventcube the following (known) preconditions need to be met:
@@ -34,7 +34,7 @@ All parameters mentioned in the specification referenced below were added to the
 - Betriebsart, changeable
 - Stoßlüftung (30 minute level 4 air burst), changeable
 - Ist Temp Raum 1 (temperature inside house)
-- T10 Außentemperator
+- T10 Außentemperatur
 
 ### Reference system
 The ioBroker adapter was tested sucessfully with:
