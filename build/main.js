@@ -52,13 +52,13 @@ class SchwoererVentcube extends utils.Adapter {
                     commonSettings.min = attributes.value_def.min;
                     commonSettings.max = attributes.value_def.max;
                 }
-                await this.setObjectAsync("parameters." + func, {
+                await this.setObjectNotExistsAsync("parameters." + func, {
                     type: "state",
                     common: commonSettings,
                     native: {},
                 });
                 //Have a corresponding "lastUpdate" object where a timestamp of data-retrieval is stored
-                await this.setObjectAsync("lastUpdate." + func, {
+                await this.setObjectNotExistsAsync("lastUpdate." + func, {
                     type: "state",
                     common: {
                         name: attributes.descr,
@@ -71,7 +71,7 @@ class SchwoererVentcube extends utils.Adapter {
                 });
             }
             // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-            this.subscribeStates("*");
+            this.subscribeStates("parameters.*");
             this.log.info("Starting connector");
             this.connector = new connector_1.Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval);
             this.connector.initializeSocket();
