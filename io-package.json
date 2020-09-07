@@ -1,19 +1,19 @@
 {
 	"common": {
 		"name": "schwoerer-ventcube",
-		"version": "1.1.0",
+		"version": "1.1.1",
 		"news": {
-			"1.1.0": {
-				"en": "Added support for all known parameters via \"Advanced Functions\"",
-				"de": "Unterstützung für alle bekannten Parameter über \"Erweiterte Funktionen\" hinzugefügt.",
-				"ru": "Добавлена поддержка всех известных параметров через «Расширенные функции».",
-				"pt": "Adicionado suporte para todos os parâmetros conhecidos por meio de \"Funções avançadas\"",
-				"nl": "Ondersteuning toegevoegd voor alle bekende parameters via \"Geavanceerde functies\"",
-				"fr": "Ajout de la prise en charge de tous les paramètres connus via \"Fonctions avancées\"",
-				"it": "Aggiunto supporto per tutti i parametri noti tramite \"Funzioni avanzate\"",
-				"es": "Soporte agregado para todos los parámetros conocidos a través de \"Funciones avanzadas\"",
-				"pl": "Dodano obsługę wszystkich znanych parametrów poprzez „Funkcje zaawansowane”",
-				"zh-cn": "通过“高级功能”增加了对所有已知参数的支持"
+			"1.1.1": {
+				"en": "Minor performance improvements",
+				"de": "Kleinere Leistungsverbesserungen",
+				"ru": "Незначительные улучшения производительности",
+				"pt": "Pequenas melhorias de desempenho",
+				"nl": "Kleine prestatieverbeteringen",
+				"fr": "Améliorations mineures des performances",
+				"it": "Piccoli miglioramenti delle prestazioni",
+				"es": "Mejoras de rendimiento menores",
+				"pl": "Drobne ulepszenia wydajności",
+				"zh-cn": "轻微的性能改进"
 			}
 		},
 		"title": "Schwoerer Ventcube",

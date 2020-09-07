@@ -45,6 +45,9 @@ The ioBroker adapter was tested sucessfully with:
 
 ## Changelog
 
+### 1.1.1
+* (Excodibur) Minor performance improvements. Improved setObject function use, limited subscribed states
+ 
 ### 1.1.0
 * (Excodibur) Multiple small fixes to fulfill ioBroker adapter requirements
 * (Excodibur) **New Option** ***Advanced Functions***: The adapter was extended to retrieve status for all known functions of Ventcube system. This includes 100+ new fields that include features of Ventcube like heating, cooling, etc.
