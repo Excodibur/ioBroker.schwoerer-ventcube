@@ -69,7 +69,7 @@
 	},
 	"native": {
 		"server" : "localhost",
-		"port": 502,
+		"port": 10502,
 		"interval": 30,
 		"advancedfunctions": true
 	},

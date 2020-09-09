@@ -107,7 +107,7 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
     }
 
     listen (port) {
-        logger.info("Mock server running on localhost:502");
+        logger.info("Mock server running on localhost:"+port);
         this.server.listen(port);
     }
 
@@ -115,4 +115,4 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
 
 const server = new VentcubeMockServer();
 server.initializeHoldingRegisters();
-server.listen(502);
+server.listen(10502);
