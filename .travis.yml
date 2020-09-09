@@ -27,6 +27,4 @@ script:
   - 'npm run build'
   - 'npm run test:unit'
   - 'export DEBUG=testing:*'
-# As the adapter requires a running Ventcube server in the local network, it does not make sense to run integration tests.
-# Startup will fail, as the server is simply not reachable in Travis-CI env.
-# - 'npm run test:integration'
+  - 'npm run test:integration:complete'

@@ -7,8 +7,7 @@
     "email": "excodibur@posteo.de"
   },
   "contributors": [
-    {
-    }
+    {}
   ],
   "engines": {
     "node": ">=10.0.0"
@@ -50,7 +49,8 @@
     "sinon-chai": "^3.5.0",
     "source-map-support": "^0.5.19",
     "ts-node": "^8.10.2",
-    "typescript": "^3.9.7"
+    "typescript": "^3.9.7",
+    "winston": "^3.3.3"
   },
   "main": "build/main.js",
   "scripts": {
@@ -64,7 +64,11 @@
     "test:unit": "mocha test/unit --exit",
     "test:integration": "mocha test/integration --exit",
     "test": "npm run test:ts && npm run test:package",
-    "lint": "eslint --ext .ts src"
+    "lint": "eslint --ext .ts src",
+    "mockserver": "node test/lib/ventcube_mockserver.js",
+    "test:integration:pre": "npm run mockserver &",
+    "test:integration:clean": "trap 'exit 0' TERM; pkill -f mockserver",
+    "test:integration:complete": "npm run test:integration:clean && npm run test:integration:pre && npm run test:integration && npm run test:integration:clean"
   },
   "bugs": {
     "url": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues"

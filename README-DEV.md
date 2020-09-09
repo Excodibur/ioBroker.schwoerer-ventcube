@@ -10,41 +10,30 @@ Several npm scripts are predefined for your convenience. You can run them using 
 |-------------|----------------------------------------------------------|
 | `build`    | Re-compile the TypeScript sources.                       |
 | `watch`     | Re-compile the TypeScript sources and watch for changes. |
+| `mockserver` | Start a Ventcube (Modbus) mock-server on localhost:502 |
 | `test:ts`   | Executes the tests you defined in `*.test.ts` files.     |
 | `test:package`    | Ensures your `package.json` and `io-package.json` are valid. |
 | `test:unit`       | Tests the adapter startup with unit tests (fast, but might require module mocks to work). |
 | `test:integration`| Tests the adapter startup with an actual instance of ioBroker. |
+| `test:integration:complete` | Starts a **Ventcube mockserver** and runs integration tests against it.
 | `test` | Performs a minimal test run on package files and your tests. |
 | `lint` | Runs `ESLint` to check your code for formatting errors and potential bugs. |
 
-### Writing tests
-When done right, testing code is invaluable, because it gives you the 
-confidence to change your code while knowing exactly if and when 
-something breaks. A good read on the topic of test-driven development 
-is https://hackernoon.com/introduction-to-test-driven-development-tdd-61a13bc92d92. 
-Although writing tests before the code might seem strange at first, but it has very 
-clear upsides.
+### Tests
 
-The template provides you with basic tests for the adapter startup and package files.
-It is recommended that you add your own tests into the mix.
+#### Unit Tests
+At the moment there are no real unit tests for this adapter
 
-### Publishing the adapter
-To get your adapter released in ioBroker, please refer to the documentation 
-of [ioBroker.repositories](https://github.com/ioBroker/ioBroker.repositories#requirements-for-adapter-to-get-added-to-the-latest-repository).
+#### Integration Tests
 
-### Test the adapter manually on a local ioBroker installation
-In order to install the adapter locally without publishing, the following steps are recommended:
-1. Create a tarball from your dev directory:  
-	```bash
-	npm pack
-	```
-1. Upload the resulting file to your ioBroker host
-1. Install it locally (The paths are different on Windows):
-	```bash
-	cd /opt/iobroker
-	npm i /path/to/tarball.tgz
-	```
+##### Mockserver
+The adapter comes with a Ventcube (Modbus) mock-server that can be started via `npm run mockserver`. On each start the adapter generates a set of dummy values (within the ranges supported by Ventcube) and writes the current value-list to a textfile that can be used as basis for comparison in the integration tests.
 
-For later updates, the above procedure is not necessary. Just do the following:
-1. Overwrite the changed files in the adapter directory (`/opt/iobroker/node_modules/iobroker.schwoerer-ventcube`)
-1. Execute `iobroker upload schwoerer-ventcube` on the ioBroker host
+The mock-server also supports write requests (to registers), but it won't check if the values are supported by Ventcube. This is due to limitations of the Modbus server concept. If a value is updated, the server also upates the textfile.
+
+##### Testcases
+Currently the most basic scenarios are checked. This includes:
+- Start of the adapter and successful connection to mock
+- Check if the adapter is able to retrieve data from server
+- Check if the adapter is able to udpate data on the server
+

@@ -99,9 +99,17 @@ export class Connector {
         
         this.client.readHoldingRegisters(register, fields)
             .then(({ metrics, request, response }:any) => {
-                this.context.log.silly('Transfer Time: ' + metrics.transferTime);
-                this.context.log.silly('Response Body Payload: ' + response.body.valuesAsArray);
-                callback(func, response.body.valuesAsArray, new Date());
+                this.context.log.silly('[' + register + ']Transfer Time: ' + metrics.transferTime);
+
+                // Workaround: 
+                // Unfortunately, according to https://github.com/Cloud-Automation/node-modbus/issues/102#issuecomment-264646262
+                // response.body.array can't be used (reliably) to retrieve holding-register values, as it be default assumes unsigned 
+                // 16bit integers. The problem is that e.g. temperatures could also be negative numbers, so we need to get the data from
+                // buffer directly to retrieve a signed 16bit integer.
+                let responseValue = response.body.valuesAsBuffer.readInt16BE(0);
+                this.context.log.debug('[' + register + ']Response value from buffer: ' + responseValue);
+ 
+                callback(func, responseValue, new Date());
             })
             .catch((error:any) => {
                 this.context.log.error(error.message);
@@ -112,7 +120,12 @@ export class Connector {
     public writeDataToRegister(func: string, register: number, value: number) {
         this.context.log.debug('Changing register ' + register + ' value to: ' + value + "|" + value.toString(16));
         //Convert value from decimal to hexadecimal to write it to register
-        this.client.writeMultipleRegisters(register, [value.toString(16)])
+        // Workaround
+        var s16_buffer = Buffer.alloc(2);
+        s16_buffer.writeInt16BE(value, 0);
+
+        //this.client.writeMultipleRegisters(register, [value.toString(16)])
+        this.client.writeMultipleRegisters(register, [s16_buffer.readUInt16BE(0)])
             .then(({ metrics, request, response }: any) => {
                 this.context.log.silly('Transfer Time: ' + metrics.transferTime);
                 this.context.log.silly('Response Function Code: ' + response.body.fc);

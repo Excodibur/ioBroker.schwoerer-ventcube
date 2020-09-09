@@ -68,10 +68,10 @@
 		]
 	},
 	"native": {
-		"server" : "HERMES-LT",
+		"server" : "localhost",
 		"port": 502,
 		"interval": 30,
-		"advancedfunctions": false
+		"advancedfunctions": true
 	},
 	"objects": [],
 	"instanceObjects": []
