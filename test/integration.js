@@ -53,8 +53,10 @@ tests.integration(path.join(__dirname, ".."), {
                         }
                     });
 
+                    await harness.stopController();
+                    harness.removeAllListeners();
                 });
-            }).timeout(20000);
+            }).timeout(50000);
 
             it ("should write correct value to Ventcube mock", () => {
                 return new Promise(async (resolve, reject) => {
@@ -89,6 +91,9 @@ tests.integration(path.join(__dirname, ".."), {
                     } else {
                         reject("ERROR - Value for function base-temp-room-1 should have been updated to 33, but in Mock actually is " + mockValues['base-temp-room-1'])
                     }
+                    
+                    await harness.stopController();
+                    harness.removeAllListeners();
                 });
 
             }).timeout(30000);;
