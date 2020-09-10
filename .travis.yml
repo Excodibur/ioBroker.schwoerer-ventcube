@@ -27,4 +27,4 @@ script:
   - 'npm run build'
   - 'npm run test:unit'
   - 'export DEBUG=testing:*'
-  - 'npm run test:integration:complete'
+  - 'if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then npm run test:integration:complete-win; else npm run test:integration:complete; fi

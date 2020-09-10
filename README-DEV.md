@@ -15,7 +15,10 @@ Several npm scripts are predefined for your convenience. You can run them using 
 | `test:package`    | Ensures your `package.json` and `io-package.json` are valid. |
 | `test:unit`       | Tests the adapter startup with unit tests (fast, but might require module mocks to work). |
 | `test:integration`| Tests the adapter startup with an actual instance of ioBroker. |
-| `test:integration:complete` | Starts a **Ventcube mockserver** and runs integration tests against it.
+| `test:integration:mock`| Starts `mockserver` in background (only on Linux & OSX) |
+| `test:integration:mock-win`| Starts `mockserver` in background (only on Windows) |
+| `test:integration:complete` | Starts a **Ventcube mockserver** and runs integration tests against it. (Linux & OSX) |
+| `test:integration:complete-win` | Starts a **Ventcube mockserver** and runs integration tests against it. (Windows) |
 | `test` | Performs a minimal test run on package files and your tests. |
 | `lint` | Runs `ESLint` to check your code for formatting errors and potential bugs. |
 
@@ -25,6 +28,7 @@ Several npm scripts are predefined for your convenience. You can run them using 
 At the moment there are no real unit tests for this adapter
 
 #### Integration Tests
+The fully automated integration test (`test:integration:complete`) currently works on Linux and OSX. Unfortunately on Windows background-process are started differently,lso `test-integration:complete-win` needs to be used. 
 
 ##### Mockserver
 The adapter comes with a Ventcube (Modbus) mock-server that can be started via `npm run mockserver`. On each start the adapter generates a set of dummy values (within the ranges supported by Ventcube) and writes the current value-list to a textfile that can be used as basis for comparison in the integration tests.
