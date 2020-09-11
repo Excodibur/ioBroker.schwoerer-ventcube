@@ -30,6 +30,12 @@ Depending on the building-specific Ventcube setup not all parameters that can be
 
 All parameters mentioned in the specification referenced below were added to the adapter and can be accessed via ***Advanced Functions*** option that is configurable during adapter deployment. Enabling this option will cause the adapter to periodically retrieve data for 100+ parameters, of which most might not be used in common households. Test scope was limited to ***Basic Functions*** (enabled by default).
 
+The following default config-values likely will need to be changed during adapter deployment for it to connect to Ventcube properly:
+| Parameter | Default Value | **Should be** | Explanation |
+| `server`    | localhost | ***HERMES-LT*** or ***local network IP of Ventcube*** | Default value is used for tests and definitely needs to be changed! |
+| `port`      | 10502 | ***502*** | Default value is used for tests and definitely needs to be changed! |
+| `interval`  | 
+
 #### Most interesting parameters
 - Betriebsart, changeable
 - Stoßlüftung (30 minute level 4 air burst), changeable
@@ -42,22 +48,6 @@ The ioBroker adapter was tested sucessfully with:
 | Control Panel | Ventcube | Modbus specification              |
 |---------------|----------|-----------------------------------|
 | V01.10        | V02.26   | Parameterliste_Modbus_TCP_03.2020 |
-
-## Changelog
-
-### 1.1.1
-* (Excodibur) Minor performance improvements. Improved setObject function use, limited subscribed states
- 
-### 1.1.0
-* (Excodibur) Multiple small fixes to fulfill ioBroker adapter requirements
-* (Excodibur) **New Option** ***Advanced Functions***: The adapter was extended to retrieve status for all known functions of Ventcube system. This includes 100+ new fields that include features of Ventcube like heating, cooling, etc.
-
-### 1.0.1
-* (Excodibur) Bugfixes to adapter startup
-* (Excodibur) Added additional parameters to retrieval list
-
-### 1.0.0
-* (Excodibur) initial release
 
 ## License
 MIT License

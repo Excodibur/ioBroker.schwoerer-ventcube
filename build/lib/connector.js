@@ -1,13 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Connector = void 0;
-const Modbus = require('jsmodbus');
+const Modbus = require("jsmodbus");
 const net_1 = require("net");
 const parameters_1 = require("./schwoerer/parameters");
 class Connector {
     constructor(ventcube, server, port, useAdvancedFunctions, interval = 30) {
-        this.socketIsConnected = false;
-        this.connectionStatus = Connector.State.DISCONNECTED;
         this.server = server;
         this.port = port;
         this.readInterval = interval;
@@ -19,43 +17,35 @@ class Connector {
     connect() {
         this.context.log.info("Connecting to server " + this.server + ":" + this.port);
         this.socket.connect({ host: this.server, port: this.port });
-        this.connectionStatus = Connector.State.CONNECTING;
         this.socket.setKeepAlive(true, 5000);
     }
     handleErrors(err) {
         if (Modbus.errors.isUserRequestError(err)) {
             switch (err.err) {
-                case 'OutOfSync':
-                case 'Protocol':
-                case 'Timeout':
-                case 'ManuallyCleared':
-                case 'ModbusException':
-                case 'Offline':
-                case 'crcMismatch':
-                    this.context.log.error('Error Message: ' + err.message + 'Error' + 'Modbus Error Type: ' + err.err);
+                case "OutOfSync":
+                case "Protocol":
+                case "Timeout":
+                case "ManuallyCleared":
+                case "ModbusException":
+                case "Offline":
+                case "crcMismatch":
+                    this.context.log.error("Error Message: " + err.message + "Error" + "Modbus Error Type: " + err.err);
                     break;
             }
         }
         else if (Modbus.errors.isInternalException(err)) {
-            this.context.log.error('Error Message: ' + err.message + 'Error Name:' + err.name + 'Error Stack: ' + err.stack);
+            this.context.log.error("Error Message: " + err.message + "Error Name:" + err.name + "Error Stack: " + err.stack);
         }
         else {
-            this.context.log.error('Unknown Error:' + err);
+            this.context.log.error("Unknown Error:" + err);
         }
     }
     initializeSocket() {
-        this.socket.on('connect', () => {
-            this.connectionStatus = Connector.State.CONNECTED;
+        this.socket.on("connect", () => {
             this.context.log.info("Established connection. Starting processing");
             this.readFunctionStates(this.context.syncReadData.bind(this.context));
         });
-        this.socket.on('timeout', () => {
-            this.connectionStatus = Connector.State.TIMEDOUT;
-        });
-        this.socket.on('close', () => {
-            this.connectionStatus = Connector.State.CLOSED;
-        });
-        this.socket.on('error', (error) => {
+        this.socket.on("error", (error) => {
             this.context.log.error("ERROR: " + error);
         });
     }
@@ -65,7 +55,7 @@ class Connector {
             //Check if advanced functions should be retrieved as well
             if ((attributes.category == "advanced") && (!this.useAdvancedFunctions))
                 continue;
-            let mayRead = attributes.modbus_r > -1 ? true : false;
+            const mayRead = attributes.modbus_r > -1 ? true : false;
             if (mayRead) {
                 this.context.log.debug("checking state: " + func + ":" + attributes.modbus_r);
                 this.readDataFromHoldingRegister(callback, func, attributes.modbus_r);
@@ -76,15 +66,15 @@ class Connector {
     readDataFromHoldingRegister(callback, func, register, fields = 1) {
         this.context.log.silly("Reading register: " + register);
         this.client.readHoldingRegisters(register, fields)
-            .then(({ metrics, request, response }) => {
-            this.context.log.silly('[' + register + ']Transfer Time: ' + metrics.transferTime);
+            .then(({ metrics, _request, response }) => {
+            this.context.log.silly("[" + register + "]Transfer Time: " + metrics.transferTime);
             // Workaround: 
             // Unfortunately, according to https://github.com/Cloud-Automation/node-modbus/issues/102#issuecomment-264646262
-            // response.body.array can't be used (reliably) to retrieve holding-register values, as it be default assumes unsigned 
+            // response.body.array can"t be used (reliably) to retrieve holding-register values, as it be default assumes unsigned 
             // 16bit integers. The problem is that e.g. temperatures could also be negative numbers, so we need to get the data from
             // buffer directly to retrieve a signed 16bit integer.
-            let responseValue = response.body.valuesAsBuffer.readInt16BE(0);
-            this.context.log.debug('[' + register + ']Response value from buffer: ' + responseValue);
+            const responseValue = response.body.valuesAsBuffer.readInt16BE(0);
+            this.context.log.debug("[" + register + "]Response value from buffer: " + responseValue);
             callback(func, responseValue, new Date());
         })
             .catch((error) => {
@@ -92,24 +82,21 @@ class Connector {
         });
     }
     writeDataToRegister(func, register, value) {
-        this.context.log.debug('Changing register ' + register + ' value to: ' + value + "|" + value.toString(16));
+        this.context.log.debug("Changing register " + register + " value to: " + value + "|" + value.toString(16));
         //Convert value from decimal to hexadecimal to write it to register
         // Workaround
-        var s16_buffer = Buffer.alloc(2);
+        const s16_buffer = Buffer.alloc(2);
         s16_buffer.writeInt16BE(value, 0);
         //this.client.writeMultipleRegisters(register, [value.toString(16)])
         this.client.writeMultipleRegisters(register, [s16_buffer.readUInt16BE(0)])
-            .then(({ metrics, request, response }) => {
-            this.context.log.silly('Transfer Time: ' + metrics.transferTime);
-            this.context.log.silly('Response Function Code: ' + response.body.fc);
+            .then(({ metrics, _request, response }) => {
+            this.context.log.silly("Transfer Time: " + metrics.transferTime);
+            this.context.log.silly("Response Function Code: " + response.body.fc);
             this.context.syncReadData(func, value, new Date());
         })
             .catch((error) => {
             this.context.log.error(error.message + "Response: " + error.response.body.message + " code: " + error.response.body.code);
         });
-    }
-    getConnectionStatus() {
-        return this.connectionStatus;
     }
     close() {
         this.context.log.info("Shutting down connection.");
@@ -117,13 +104,3 @@ class Connector {
     }
 }
 exports.Connector = Connector;
-(function (Connector) {
-    let State;
-    (function (State) {
-        State[State["CONNECTING"] = 0] = "CONNECTING";
-        State[State["CONNECTED"] = 1] = "CONNECTED";
-        State[State["DISCONNECTED"] = 2] = "DISCONNECTED";
-        State[State["TIMEDOUT"] = 3] = "TIMEDOUT";
-        State[State["CLOSED"] = 4] = "CLOSED";
-    })(State = Connector.State || (Connector.State = {}));
-})(Connector = exports.Connector || (exports.Connector = {}));

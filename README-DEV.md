@@ -28,7 +28,7 @@ Several npm scripts are predefined for your convenience. You can run them using 
 At the moment there are no real unit tests for this adapter
 
 #### Integration Tests
-The fully automated integration test (`test:integration:complete`) currently works on Linux and OSX.
+The fully automated integration test (`test:integration:complete`) currently works on Linux and OSX. Btw. if integration tests are run on WSL, the mock-server needs to be stopped manually (E.g. `pkill -f mockserver`) at the end, since ***fkill-cli*** won't work here due to missing proc-table support.
 
 Unfortunately on Windows background-process are started differently,lso `test-integration:complete-win` needs to be used. This seems bugged right now, as there are internal connection errors after first testcase (see https://github.com/ioBroker/testing/issues/330).
 

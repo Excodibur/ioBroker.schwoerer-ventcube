@@ -13,10 +13,7 @@ module.exports = {
 		"indent": "off",
 		"@typescript-eslint/indent": [
 			"error",
-			"tab",
-			{
-				"SwitchCase": 1
-			}
+			4
 		],
 		"quotes": [
 			"error",
@@ -53,8 +50,13 @@ module.exports = {
 		"@typescript-eslint/no-object-literal-type-assertion": "off",
 		"@typescript-eslint/interface-name-prefix": "off",
 		"@typescript-eslint/no-non-null-assertion": "off", // This is necessary for Map.has()/get()!
+		"@typescript-eslint/no-inferrable-types": 1,
 		"no-var": "error",
 		"prefer-const": "error",
+		"semi": [
+			"error",
+			"always"
+		]
 	},
 	overrides: [
 		{

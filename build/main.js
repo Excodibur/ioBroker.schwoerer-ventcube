@@ -33,10 +33,10 @@ class SchwoererVentcube extends utils.Adapter {
                 if ((attributes.category == "advanced") && (!this.config.advancedfunctions))
                     continue;
                 this.log.info("Setting up state for " + func);
-                let mayRead = attributes.modbus_r > -1 ? true : false;
-                let mayWrite = attributes.modbus_w > -1 ? true : false;
+                const mayRead = attributes.modbus_r > -1 ? true : false;
+                const mayWrite = attributes.modbus_w > -1 ? true : false;
                 //Prepare common section for object
-                var commonSettings = {
+                const commonSettings = {
                     name: attributes.descr,
                     type: "number",
                     role: "value",
@@ -87,17 +87,17 @@ class SchwoererVentcube extends utils.Adapter {
         //handle
         this.log.debug("Updating state: " + func + " with value: " + value);
         //parse parameter if needed
-        var parameterParsed = value;
-        var parameterType = parameters_1.SchwoererParameter[func].value_type;
+        let parameterParsed = value;
+        const parameterType = parameters_1.SchwoererParameter[func].value_type;
         switch (parameterType) {
             /*case "choice":
                     parameterParsed = SchwoererParameter[func].value_def[value];
                 break;*/
             case "range":
-                var unit = parameters_1.SchwoererParameter[func].value_def.unit;
+                const unit = parameters_1.SchwoererParameter[func].value_def.unit;
                 switch (unit) {
                     case "°C":
-                        parameterParsed = (value / 10).toString();
+                        parameterParsed = (value / 10);
                         break;
                 }
                 break;
@@ -111,10 +111,12 @@ class SchwoererVentcube extends utils.Adapter {
     onUnload(callback) {
         try {
             //Terminate MODBUS connection
+            this.log.info("Shutting down adapter. Terminating Modbus connection.");
             this.connector.close();
             callback();
         }
         catch (e) {
+            this.log.error("Error shutting down: " + e);
             callback();
         }
     }
@@ -128,7 +130,7 @@ class SchwoererVentcube extends utils.Adapter {
             //Only react to manual state changes
             if (state.ack == false) {
                 this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-                var func = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, "$2");
+                const func = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, "$2");
                 this.performManualStateChange(func, state.val);
             }
         }
@@ -140,12 +142,12 @@ class SchwoererVentcube extends utils.Adapter {
     performManualStateChange(func, value) {
         //Apparently temperatures (°C) are stored as 3 digit numbers in Ventcube, but as we parse them
         //like xxx => xx.x °C we need to reverse this before updating
-        var unit = parameters_1.SchwoererParameter[func].value_def.unit;
+        const unit = parameters_1.SchwoererParameter[func].value_def.unit;
         if ((unit != undefined) && (unit == "°C")) {
             value = value * 10;
         }
         //Value validation not needed, as ObjectState has all allowed values already configured.
-        var writeRegister = parameters_1.SchwoererParameter[func].modbus_w;
+        const writeRegister = parameters_1.SchwoererParameter[func].modbus_w;
         this.connector.writeDataToRegister(func, writeRegister, parseInt(value));
     }
 }
@@ -161,5 +163,5 @@ try {
     }
 }
 catch (e) {
-    const fs = require('fs');
+    console.error(e);
 }

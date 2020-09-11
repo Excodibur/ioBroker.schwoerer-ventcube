@@ -1,5 +1,5 @@
 
-export let SchwoererParameter: { [index: string]: any } =
+export const SchwoererParameter: { [index: string]: any } =
 {
     "operation-mode":
     {
@@ -2283,4 +2283,4 @@ export let SchwoererParameter: { [index: string]: any } =
             unit: "Stunden"
         }
     }   
-}
+};

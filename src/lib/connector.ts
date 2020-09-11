@@ -1,20 +1,16 @@
-const Modbus = require('jsmodbus')
-import { Socket, SocketConnectOpts } from 'net'
+import * as Modbus from "jsmodbus";
+import { Socket } from "net";
 import { SchwoererVentcube } from "../main";
-import { SSL_OP_EPHEMERAL_RSA } from 'constants';
-import { SchwoererParameter } from './schwoerer/parameters';
-import { timeStamp } from 'console';
+import { SchwoererParameter } from "./schwoerer/parameters";
 
 export class Connector {
     private socket: Socket;
-    private socketIsConnected: boolean = false;
     private client: any;
     private server: string;
     private port: number;
     private context: SchwoererVentcube;
     private readInterval: number; //seconds
     private useAdvancedFunctions: boolean;
-    private connectionStatus = Connector.State.DISCONNECTED;
 
     public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number = 30) {
         this.server = server;
@@ -27,65 +23,56 @@ export class Connector {
         this.context = ventcube;
     }
 
-    public connect() {
+    public connect(): void {
         this.context.log.info("Connecting to server " + this.server + ":" + this.port);
         this.socket.connect({ host: this.server, port: this.port });
-        this.connectionStatus = Connector.State.CONNECTING;
         this.socket.setKeepAlive(true, 5000);
     }
 
-    private handleErrors(err: any) {
+    private handleErrors(err: any): void {
         if (Modbus.errors.isUserRequestError(err)) {
             switch (err.err) {
-                case 'OutOfSync':
-                case 'Protocol':
-                case 'Timeout':
-                case 'ManuallyCleared':
-                case 'ModbusException':
-                case 'Offline':
-                case 'crcMismatch':
-                    this.context.log.error('Error Message: ' + err.message + 'Error' + 'Modbus Error Type: ' + err.err);
+                case "OutOfSync":
+                case "Protocol":
+                case "Timeout":
+                case "ManuallyCleared":
+                case "ModbusException":
+                case "Offline":
+                case "crcMismatch":
+                    this.context.log.error("Error Message: " + err.message + "Error" + "Modbus Error Type: " + err.err);
                     break;
             }
 
         } else if (Modbus.errors.isInternalException(err)) {
-            this.context.log.error('Error Message: ' + err.message + 'Error Name:' + err.name + 'Error Stack: ' + err.stack);
+            this.context.log.error("Error Message: " + err.message + "Error Name:" + err.name + "Error Stack: " + err.stack);
         } else {
-            this.context.log.error('Unknown Error:' + err);
+            this.context.log.error("Unknown Error:" + err);
         }
     }
 
-    public initializeSocket() :void {
-        this.socket.on('connect',  () => {
-            this.connectionStatus = Connector.State.CONNECTED;
-          
+    public initializeSocket(): void {
+        this.socket.on("connect", () => {
             this.context.log.info("Established connection. Starting processing");
             this.readFunctionStates(this.context.syncReadData.bind(this.context));
 
         });
-        this.socket.on('timeout', () => {
-            this.connectionStatus = Connector.State.TIMEDOUT;
-        });
-        this.socket.on('close', () => {
-            this.connectionStatus = Connector.State.CLOSED;
-        });
-        this.socket.on('error' , (error) => {
-            this.context.log.error("ERROR: " +error);
+
+        this.socket.on("error", (error) => {
+            this.context.log.error("ERROR: " + error);
         });
     }
 
-    private readFunctionStates(callback: (func: string, value: any, time: Date) => void) {
-       
+    private readFunctionStates(callback: (func: string, value: any, time: Date) => void): void {
+
         this.context.log.debug("Reading latest states from Ventcube");
 
-        for (const [func, attributes] of Object.entries(SchwoererParameter))
-        {
+        for (const [func, attributes] of Object.entries(SchwoererParameter)) {
             //Check if advanced functions should be retrieved as well
-            if ((attributes.category == "advanced") && (! this.useAdvancedFunctions)) continue;
+            if ((attributes.category == "advanced") && (!this.useAdvancedFunctions)) continue;
 
-            let mayRead = attributes.modbus_r > -1 ? true : false;
-			if (mayRead) {
-                this.context.log.debug("checking state: "+ func +":" + attributes.modbus_r);
+            const mayRead = attributes.modbus_r > -1 ? true : false;
+            if (mayRead) {
+                this.context.log.debug("checking state: " + func + ":" + attributes.modbus_r);
                 this.readDataFromHoldingRegister(callback, func, attributes.modbus_r);
             }
         }
@@ -94,65 +81,51 @@ export class Connector {
         setTimeout(function (this: Connector) { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
     }
 
-    public readDataFromHoldingRegister(callback: (func: string, value: any, time: Date) => void, func: string, register: number, fields: number = 1) : any {
+    public readDataFromHoldingRegister(callback: (func: string, value: any, time: Date) => void, func: string, register: number, fields: number = 1): any {
         this.context.log.silly("Reading register: " + register);
-        
+
         this.client.readHoldingRegisters(register, fields)
-            .then(({ metrics, request, response }:any) => {
-                this.context.log.silly('[' + register + ']Transfer Time: ' + metrics.transferTime);
+            .then(({ metrics, _request, response }: any) => {
+                this.context.log.silly("[" + register + "]Transfer Time: " + metrics.transferTime);
 
                 // Workaround: 
                 // Unfortunately, according to https://github.com/Cloud-Automation/node-modbus/issues/102#issuecomment-264646262
-                // response.body.array can't be used (reliably) to retrieve holding-register values, as it be default assumes unsigned 
+                // response.body.array can"t be used (reliably) to retrieve holding-register values, as it be default assumes unsigned 
                 // 16bit integers. The problem is that e.g. temperatures could also be negative numbers, so we need to get the data from
                 // buffer directly to retrieve a signed 16bit integer.
-                let responseValue = response.body.valuesAsBuffer.readInt16BE(0);
-                this.context.log.debug('[' + register + ']Response value from buffer: ' + responseValue);
- 
+                const responseValue = response.body.valuesAsBuffer.readInt16BE(0);
+                this.context.log.debug("[" + register + "]Response value from buffer: " + responseValue);
+
                 callback(func, responseValue, new Date());
             })
-            .catch((error:any) => {
+            .catch((error: any) => {
                 this.context.log.error(error.message);
-            })
+            });
     }
 
-    
-    public writeDataToRegister(func: string, register: number, value: number) {
-        this.context.log.debug('Changing register ' + register + ' value to: ' + value + "|" + value.toString(16));
+
+    public writeDataToRegister(func: string, register: number, value: number): void {
+        this.context.log.debug("Changing register " + register + " value to: " + value + "|" + value.toString(16));
         //Convert value from decimal to hexadecimal to write it to register
         // Workaround
-        var s16_buffer = Buffer.alloc(2);
+        const s16_buffer = Buffer.alloc(2);
         s16_buffer.writeInt16BE(value, 0);
 
         //this.client.writeMultipleRegisters(register, [value.toString(16)])
         this.client.writeMultipleRegisters(register, [s16_buffer.readUInt16BE(0)])
-            .then(({ metrics, request, response }: any) => {
-                this.context.log.silly('Transfer Time: ' + metrics.transferTime);
-                this.context.log.silly('Response Function Code: ' + response.body.fc);
+            .then(({ metrics, _request, response }: any) => {
+                this.context.log.silly("Transfer Time: " + metrics.transferTime);
+                this.context.log.silly("Response Function Code: " + response.body.fc);
 
                 this.context.syncReadData(func, value, new Date());
             })
-            .catch((error:any) => {
+            .catch((error: any) => {
                 this.context.log.error(error.message + "Response: " + error.response.body.message + " code: " + error.response.body.code);
-            })
+            });
     }
 
-    public getConnectionStatus() : number {
-        return this.connectionStatus;
-    }
-
-    public close() {
+    public close(): void {
         this.context.log.info("Shutting down connection.");
         this.socket.end();
     }
-}
-
-export namespace Connector {
-    export enum State {
-        CONNECTING,
-        CONNECTED,
-        DISCONNECTED,
-        TIMEDOUT,
-        CLOSED
-    } 
 }
