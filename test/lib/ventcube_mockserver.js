@@ -25,6 +25,9 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
         
         this.on('preWriteMultipleRegisters', this._onPreWriteMultipleRegisters.bind(this))
         this.on('preReadHoldingRegisters', this._onPreReadHoldingRegisters.bind(this))
+        this.server.on('error', this._onError.bind(this));
+        //this.server.on('connection', this._onConnection.bind(this));
+        this.server.on('close', this._onClose.bind(this));
         process.on('SIGINT', this.terminate.bind(this))
         process.on('SIGTERM', this.terminate.bind(this))
     }
@@ -89,6 +92,31 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
         logger.info('Function: '+func);
         this.mockServerRegisterValues[func] = value;
         this.dumpNumbersToFile(this.dumpFilename, this.mockServerRegisterValues);
+    }
+
+    _onError(error) {
+        logger.error('Got error: '+error);
+    }
+
+    _onClose(msg) {
+        logger.error('Closed conntection: '+msg);
+    }
+
+    _onConnection(connection) {
+        //Setup socket handling
+        //Socket Event: error
+        connection.on('error', this._onConnectionError.bind(connection));
+       // connection.on('close', this._onConnectionClose.bind(connection));  //Bad loops
+    }
+
+    _onConnectionError(error) {
+        logger.error("Connection Error: " + error);
+        console.dir(error);
+    }
+
+    _onConnectionClose(hadError) { //Nightmare
+        if (hadError)
+            this.connect(10502)
     }
 
     dumpNumbersToFile(filename, arr) {

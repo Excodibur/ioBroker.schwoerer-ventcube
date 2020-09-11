@@ -149,9 +149,11 @@ export class SchwoererVentcube extends utils.Adapter {
 	private onUnload(callback: () => void): void {
 		try {
 			//Terminate MODBUS connection
+			this.log.info("Shutting down adapter. Terminating Modbus connection.")
 			this.connector.close();
 			callback();
 		} catch (e) {
+			this.log.error("Error shutting down: " + e);
 			callback();
 		}
 	}

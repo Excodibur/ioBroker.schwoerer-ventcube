@@ -28,7 +28,9 @@ Several npm scripts are predefined for your convenience. You can run them using 
 At the moment there are no real unit tests for this adapter
 
 #### Integration Tests
-The fully automated integration test (`test:integration:complete`) currently works on Linux and OSX. Unfortunately on Windows background-process are started differently,lso `test-integration:complete-win` needs to be used. 
+The fully automated integration test (`test:integration:complete`) currently works on Linux and OSX.
+
+Unfortunately on Windows background-process are started differently,lso `test-integration:complete-win` needs to be used. This seems bugged right now, as there are internal connection errors after first testcase (see https://github.com/ioBroker/testing/issues/330).
 
 ##### Mockserver
 The adapter comes with a Ventcube (Modbus) mock-server that can be started via `npm run mockserver`. On each start the adapter generates a set of dummy values (within the ranges supported by Ventcube) and writes the current value-list to a textfile that can be used as basis for comparison in the integration tests.
