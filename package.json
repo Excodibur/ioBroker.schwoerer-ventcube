@@ -1,6 +1,6 @@
 {
   "name": "iobroker.schwoerer-ventcube",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Adapter for Schwoererhaus Ventcube system",
   "author": {
     "name": "Excodibur",

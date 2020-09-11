@@ -1,78 +1,90 @@
 {
-	"common": {
-		"name": "schwoerer-ventcube",
-		"version": "1.1.1",
-		"news": {
-			"1.1.1": {
-				"en": "Minor performance improvements",
-				"de": "Kleinere Leistungsverbesserungen",
-				"ru": "Незначительные улучшения производительности",
-				"pt": "Pequenas melhorias de desempenho",
-				"nl": "Kleine prestatieverbeteringen",
-				"fr": "Améliorations mineures des performances",
-				"it": "Piccoli miglioramenti delle prestazioni",
-				"es": "Mejoras de rendimiento menores",
-				"pl": "Drobne ulepszenia wydajności",
-				"zh-cn": "轻微的性能改进"
-			}
-		},
-		"title": "Schwoerer Ventcube",
-		"titleLang": {
-			"en": "Schwoerer Ventcube",
-			"de": "Schwoerer Ventcube",
-			"ru": "Schwoerer Ventcube",
-			"pt": "Schwoerer Ventcube",
-			"nl": "Schwoerer Ventcube",
-			"fr": "Schwoerer Ventcube",
-			"it": "Schwoerer Ventcube",
-			"es": "Schwoerer Ventcube",
-			"pl": "Schwoerer Ventcube",
-			"zh-cn": "Schwoerer Ventcube"
-		},
-		"desc": {
-			"en": "Adapter for Schwoererhaus Ventcube system",
-			"de": "Adapter für Schwoererhaus Ventcube System",
-			"ru": "Адаптер для системы Schwoererhaus Ventcube",
-			"pt": "Adaptador para sistema Schwoererhaus Ventcube",
-			"nl": "Adapter voor Schwoererhaus Ventcube-systeem",
-			"fr": "Adaptateur pour système Schwoererhaus Ventcube",
-			"it": "Adattatore per sistema Schwoererhaus Ventcube",
-			"es": "Adaptador para sistema Schwoererhaus Ventcube",
-			"pl": "Adapter do systemu Schwoererhaus Ventcube",
-			"zh-cn": "Schwoererhaus Ventcube系统适配器"
-		},
-		"authors": [
-			"Excodibur <excodibur@posteo.de>"
-		],
-		"keywords": [
-			"Schwoererhaus"
-		],
-		"license": "MIT",
-		"platform": "Javascript/Node.js",
-		"main": "build/main.js",
-		"icon": "schwoerer-ventcube.png",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/Excodibur/ioBroker.schwoerer-ventcube/master/admin/schwoerer-ventcube.png",
-		"readme": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/master/README.md",
-		"loglevel": "info",
-		"mode": "daemon",
-		"type": "climate-control",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "poll",
-		"materialize": true,
-		"dependencies": [
-			{
-				"js-controller": ">=1.4.2"
-			}
-		]
-	},
-	"native": {
-		"server" : "localhost",
-		"port": 10502,
-		"interval": 30,
-		"advancedfunctions": true
-	},
-	"objects": [],
-	"instanceObjects": []
+    "common": {
+        "name": "schwoerer-ventcube",
+        "version": "1.1.2",
+        "news": {
+            "1.1.2": {
+                "en": "Fixed bugs with negative function values (e.g. negative temperatures)\nAdded integration testcases and Ventcube mockserver\nImproved code quality (ESLint)\nAdded (release-script)[https://github.com/AlCalzone/release-script] to standartize build process",
+                "de": "Fehler mit negativen Funktionswerten (z. B. negative Temperaturen) behoben\nIntegrationstestfälle und Ventcube-Mockserver hinzugefügt\nVerbesserte Codequalität (ESLint)\nHinzugefügt (Release-Skript) [https://github.com/AlCalzone/release-script], um den Build-Prozess zu standardisieren",
+                "ru": "Исправлены ошибки с отрицательными значениями функции (например, отрицательные температуры)\nДобавлены тестовые примеры интеграции и моксервер Ventcube.\nПовышенное качество кода (ESLint)\nДобавлен (релиз-скрипт) [https://github.com/AlCalzone/release-script] для стандартизации процесса сборки",
+                "pt": "Erros corrigidos com valores de função negativos (por exemplo, temperaturas negativas)\nAdicionados os casos de teste de integração e o Ventcube mockserver\nQualidade de código aprimorada (ESLint)\nAdicionado (script de lançamento) [https://github.com/AlCalzone/release-script] para padronizar o processo de compilação",
+                "nl": "Bugs opgelost met negatieve functiewaarden (bijv. Negatieve temperaturen)\nIntegratietestcases en Ventcube-mockserver toegevoegd\nVerbeterde codekwaliteit (ESLint)\nToegevoegd (release-script) [https://github.com/AlCalzone/release-script] om het bouwproces te standaardiseren",
+                "fr": "Correction de bugs avec des valeurs de fonction négatives (par exemple des températures négatives)\nAjout de tests d'intégration et de mockserver Ventcube\nAmélioration de la qualité du code (ESLint)\nAjouté (release-script) [https://github.com/AlCalzone/release-script] pour standartize le processus de construction",
+                "it": "Risolti bug con valori di funzione negativi (es. Temperature negative)\nAggiunti casi di test di integrazione e mockserver di Ventcube\nQualità del codice migliorata (ESLint)\nAggiunto (release-script) [https://github.com/AlCalzone/release-script] per standardizzare il processo di compilazione",
+                "es": "Errores corregidos con valores de función negativos (por ejemplo, temperaturas negativas)\nSe agregaron casos de prueba de integración y Ventcube mockserver\nCalidad de código mejorada (ESLint)\nSe agregó (release-script) [https://github.com/AlCalzone/release-script] para estandarizar el proceso de compilación",
+                "pl": "Naprawiono błędy z ujemnymi wartościami funkcji (np. Ujemne temperatury)\nDodano testy integracji i mockerver Ventcube\nPoprawiona jakość kodu (ESLint)\nDodano (release-script) [https://github.com/AlCalzone/release-script] w celu ujednolicenia procesu budowania",
+                "zh-cn": "修复了带有负函数值的错误（例如负温度）\n添加了集成测试用例和Ventcube模拟服务器\n改进的代码质量（ESLint）\n添加了（release-script）[https://github.com/AlCalzone/release-script]以标准化构建过程"
+            },
+            "1.1.1": {
+                "en": "Minor performance improvements",
+                "de": "Kleinere Leistungsverbesserungen",
+                "ru": "Незначительные улучшения производительности",
+                "pt": "Pequenas melhorias de desempenho",
+                "nl": "Kleine prestatieverbeteringen",
+                "fr": "Améliorations mineures des performances",
+                "it": "Piccoli miglioramenti delle prestazioni",
+                "es": "Mejoras de rendimiento menores",
+                "pl": "Drobne ulepszenia wydajności",
+                "zh-cn": "轻微的性能改进"
+            }
+        },
+        "title": "Schwoerer Ventcube",
+        "titleLang": {
+            "en": "Schwoerer Ventcube",
+            "de": "Schwoerer Ventcube",
+            "ru": "Schwoerer Ventcube",
+            "pt": "Schwoerer Ventcube",
+            "nl": "Schwoerer Ventcube",
+            "fr": "Schwoerer Ventcube",
+            "it": "Schwoerer Ventcube",
+            "es": "Schwoerer Ventcube",
+            "pl": "Schwoerer Ventcube",
+            "zh-cn": "Schwoerer Ventcube"
+        },
+        "desc": {
+            "en": "Adapter for Schwoererhaus Ventcube system",
+            "de": "Adapter für Schwoererhaus Ventcube System",
+            "ru": "Адаптер для системы Schwoererhaus Ventcube",
+            "pt": "Adaptador para sistema Schwoererhaus Ventcube",
+            "nl": "Adapter voor Schwoererhaus Ventcube-systeem",
+            "fr": "Adaptateur pour système Schwoererhaus Ventcube",
+            "it": "Adattatore per sistema Schwoererhaus Ventcube",
+            "es": "Adaptador para sistema Schwoererhaus Ventcube",
+            "pl": "Adapter do systemu Schwoererhaus Ventcube",
+            "zh-cn": "Schwoererhaus Ventcube系统适配器"
+        },
+        "authors": [
+            "Excodibur <excodibur@posteo.de>"
+        ],
+        "keywords": [
+            "Schwoererhaus"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "build/main.js",
+        "icon": "schwoerer-ventcube.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/Excodibur/ioBroker.schwoerer-ventcube/master/admin/schwoerer-ventcube.png",
+        "readme": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "climate-control",
+        "compact": true,
+        "connectionType": "local",
+        "dataSource": "poll",
+        "materialize": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ]
+    },
+    "native": {
+        "server": "localhost",
+        "port": 10502,
+        "interval": 30,
+        "advancedfunctions": true
+    },
+    "objects": [],
+    "instanceObjects": []
 }
