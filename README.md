@@ -31,10 +31,12 @@ Depending on the building-specific Ventcube setup not all parameters that can be
 All parameters mentioned in the specification referenced below were added to the adapter and can be accessed via ***Advanced Functions*** option that is configurable during adapter deployment. Enabling this option will cause the adapter to periodically retrieve data for 100+ parameters, of which most might not be used in common households. Test scope was limited to ***Basic Functions*** (enabled by default).
 
 The following default config-values likely will need to be changed during adapter deployment for it to connect to Ventcube properly:
-| Parameter | Default Value | **Should be** | Explanation |
+| Parameter   | Default Value | **Should be** | Explanation |
+|-------------|---------------|---------------|-------------|
 | `server`    | localhost | ***HERMES-LT*** or ***local network IP of Ventcube*** | Default value is used for tests and definitely needs to be changed! |
 | `port`      | 10502 | ***502*** | Default value is used for tests and definitely needs to be changed! |
-| `interval`  | 
+| `interval`  | 30 | 30 | After how many seconds should metrics be refreshed from server |
+| `advanced functions` | &#10003; | | While basic functions might be sufficient if Ventcube is just used for air ventilation, advanced functions should be checked if heating/cooling functions, or system metrics (error codes, fan details) are needed. |
 
 #### Most interesting parameters
 - Betriebsart, changeable
