@@ -1,6 +1,7 @@
 const path = require("path");
 const { tests } = require("@iobroker/testing");
 const { exception } = require("console");
+
 function delay(t, val) {
     return new Promise(function(resolve) {
         setTimeout(function() {
