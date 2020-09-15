@@ -89,6 +89,7 @@ jobs:
             - if: ${{ matrix.os }} == "windows-latest"
               name: Run integration tests on ${{ matrix.os }} env
               run: npm run test:integration:complete-win
+              env:
                   CI: true
               
             - if: ${{ matrix.os }} != "windows-latest"
