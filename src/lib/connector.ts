@@ -1,6 +1,5 @@
 import * as Modbus from "jsmodbus";
 import { Socket } from "net";
-import { fakeServerWithClock } from "sinon";
 import { SchwoererVentcube } from "../main";
 import { SchwoererParameter } from "./schwoerer/parameters";
 
