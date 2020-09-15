@@ -86,10 +86,13 @@ jobs:
             - name: Install dependencies
               run: npm ci
 
-            - name: Run component tests
-              if: ${{ matrix.os }} == "windows-latest"
+            - if: ${{ matrix.os }} == "windows-latest"
+              name: Run integration tests on ${{ matrix.os }} env
               run: npm run test:integration:complete-win
-              if: ${{ matrix.os }} != "windows-latest"
+                  CI: true
+              
+            - if: ${{ matrix.os }} != "windows-latest"
+              name: Run integration tests on ${{ matrix.os }} env
               run: npm run test:integration:complete
               env:
                   CI: true
