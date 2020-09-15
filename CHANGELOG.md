@@ -3,6 +3,13 @@
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+## 1.2.0 (2020-09-15)
+* Added missing reconnect behaviour in case Ventcube is not reachable
+* Added connection settings for new reconnect-behaviour
+* Reworked layout ouf settings page
+* (Development) Fixed mock-server connection handling and Windows integration tests
+* (Development) Moved integration tests (windows, Linux, OSX) from Travis to Github Actions
+
 ## 1.1.2 (2020-09-11)
 * Fixed bugs with negative function values (e.g. negative temperatures)
 * (Development) Added integration testcases and Ventcube mockserver
