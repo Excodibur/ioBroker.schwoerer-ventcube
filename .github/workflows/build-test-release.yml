@@ -87,13 +87,13 @@ jobs:
               run: npm ci
 
             - name: Run integration tests on Windows env
-              if: matrix.os == "windows-latest"
+              if: matrix.os == 'windows-latest'
               run: npm run test:integration:complete-win
               env:
                   CI: true
               
             - name: Run integration tests on Linux/OSX env
-              if:  matrix.os != "windows-latest"
+              if: matrix.os != 'windows-latest'
               run: npm run test:integration:complete
               env:
                   CI: true
