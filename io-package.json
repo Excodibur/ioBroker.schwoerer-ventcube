@@ -83,7 +83,9 @@
         "server": "localhost",
         "port": 10502,
         "interval": 30,
-        "advancedfunctions": true
+        "advancedfunctions": true,
+        "reconnectattempts": 10,
+        "reconnectdelayms": 10000
     },
     "objects": [],
     "instanceObjects": []

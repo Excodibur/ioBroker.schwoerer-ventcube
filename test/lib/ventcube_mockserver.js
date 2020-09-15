@@ -27,6 +27,7 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
         this.on('preReadHoldingRegisters', this._onPreReadHoldingRegisters.bind(this))
         process.on('SIGINT', this.terminate.bind(this))
         process.on('SIGTERM', this.terminate.bind(this))
+        process.on('SIGABRT', this.terminate.bind(this))
     }
 
     mapWRegisterToFunction(field) {
@@ -91,7 +92,9 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
         this.dumpNumbersToFile(this.dumpFilename, this.mockServerRegisterValues);
     }
 
-    
+    _onClose() {
+        this.terminate();
+    }
 
     _onConnection(connection) {
         //Setup socket handling
@@ -123,7 +126,16 @@ class VentcubeMockServer extends jsmodbus.ModbusTCPServer {
         this.server.close();
 
         //remove dump file
-        fs.unlinkSync(this.dumpFilename);
+        fs.unlinkSync(this.dumpFilename,function(err) {
+            if(err && err.code == 'ENOENT') {
+                logger.warn("File doesn't exist, so won't remove it.");
+            } else if (err) {
+                // other errors, e.g. maybe we don't have enough permission
+                logger.error("Error occurred while trying to remove file");
+            } else {
+                info.info("Cleaned up file " + this.dumpFilename);
+            }
+        });
     }
 
     listen (port) {

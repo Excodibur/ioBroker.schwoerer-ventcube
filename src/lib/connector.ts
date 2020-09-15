@@ -1,5 +1,6 @@
 import * as Modbus from "jsmodbus";
 import { Socket } from "net";
+import { fakeServerWithClock } from "sinon";
 import { SchwoererVentcube } from "../main";
 import { SchwoererParameter } from "./schwoerer/parameters";
 
@@ -11,12 +12,18 @@ export class Connector {
     private context: SchwoererVentcube;
     private readInterval: number; //seconds
     private useAdvancedFunctions: boolean;
+    private reconnectAttempts: number;
+    private reconnectDelayMs: number;
+    private isConnected: boolean = false;
+    private isReconnecting: boolean = false;
 
-    public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number = 30) {
+    public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number, reconnectAttempts: number, reconnectDelayMs: number) {
         this.server = server;
         this.port = port;
         this.readInterval = interval;
         this.useAdvancedFunctions = useAdvancedFunctions;
+        this.reconnectAttempts = reconnectAttempts;
+        this.reconnectDelayMs = reconnectDelayMs;
 
         this.socket = new Socket();
         this.client = new Modbus.client.TCP(this.socket);
@@ -27,6 +34,23 @@ export class Connector {
         this.context.log.info("Connecting to server " + this.server + ":" + this.port);
         this.socket.connect({ host: this.server, port: this.port });
         this.socket.setKeepAlive(true, 5000);
+    }
+
+    private reconnect(attempt: number = 0): void {
+        if (this.isConnected)
+            return;
+
+        if (attempt >= this.reconnectAttempts)
+            return;
+
+        this.isReconnecting = true;
+
+        this.context.log.info("Attempting to reconnect to server. (attempt " + (attempt + 1) + " out of " + this.reconnectAttempts + ")");
+
+        this.socket.connect({ host: this.server, port: this.port });
+        this.socket.setKeepAlive(true, 5000);
+
+        setTimeout(function (this: Connector) { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
     }
 
     private handleErrors(err: any): void {
@@ -53,8 +77,14 @@ export class Connector {
     public initializeSocket(): void {
         this.socket.on("connect", () => {
             this.context.log.info("Established connection. Starting processing");
+            this.isConnected = true;
+            this.isReconnecting = false;
             this.readFunctionStates(this.context.syncReadData.bind(this.context));
 
+        });
+
+        this.socket.on("timeout", () => {
+            this.context.log.warn("Received timeout from server " + this.server + ":" + this.port);
         });
 
         this.socket.on("error", (error) => {
@@ -98,6 +128,17 @@ export class Connector {
 
                 callback(func, responseValue, new Date());
             })
+            .catch((error: Modbus.UserRequestError<any>) => {
+                switch (error.err) {
+                    case "Offline":
+                        this.isConnected = false;
+                        if (!this.isReconnecting) {
+                            this.context.log.warn("Ventcube server seems offline. Data will be retrieved after next successful reconnect.");
+                            this.reconnect();
+                        }
+                        break;
+                }
+            })
             .catch((error: any) => {
                 this.context.log.error(error.message);
             });
@@ -118,6 +159,17 @@ export class Connector {
                 this.context.log.silly("Response Function Code: " + response.body.fc);
 
                 this.context.syncReadData(func, value, new Date());
+            })
+            .catch((error: Modbus.UserRequestError<any>) => {
+                switch (error.err) {
+                    case "Offline":
+                        this.isConnected = false;
+                        if (!this.isReconnecting) {
+                            this.context.log.warn("Ventcube server is offline. Please try to update state after successful reconnect again.");
+                            this.reconnect();
+                        }
+                        break;
+                }
             })
             .catch((error: any) => {
                 this.context.log.error(error.message + "Response: " + error.response.body.message + " code: " + error.response.body.code);

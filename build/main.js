@@ -23,10 +23,7 @@ class SchwoererVentcube extends utils.Adapter {
         // Initialize your adapter here
         try {
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
-            this.log.debug("config server: " + this.config.server);
-            this.log.debug("config port: " + this.config.port);
-            this.log.debug("config interval: " + this.config.interval);
-            this.log.debug("config advancedfunctions: " + this.config.advancedfunctions);
+            this.log.debug("config: " + this.config);
             //Setup state objects for Schwoerer parameters
             for (const [func, attributes] of Object.entries(parameters_1.SchwoererParameter)) {
                 //Potentially skip parameters marked as "advanced"
@@ -73,7 +70,7 @@ class SchwoererVentcube extends utils.Adapter {
             // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
             this.subscribeStates("parameters.*");
             this.log.info("Starting connector");
-            this.connector = new connector_1.Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval);
+            this.connector = new connector_1.Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval, this.config.reconnectattempts, this.config.reconnectdelayms);
             this.connector.initializeSocket();
             this.log.debug("Connecting");
             this.connector.connect();

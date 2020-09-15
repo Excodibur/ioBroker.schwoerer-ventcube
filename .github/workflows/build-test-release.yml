@@ -74,7 +74,7 @@ jobs:
         strategy:
             matrix:
                 node-version: [10.x, 12.x, 14.x]
-                os: [ubuntu-latest]
+                os: [ubuntu-latest, macos-latest, windows-latest]
 
         steps:
             - uses: actions/checkout@v1
@@ -87,6 +87,9 @@ jobs:
               run: npm ci
 
             - name: Run component tests
+              if: ${{ matrix.os }} == "windows-latest"
+              run: npm run test:integration:complete-win
+              if: ${{ matrix.os }} != "windows-latest"
               run: npm run test:integration:complete
               env:
                   CI: true

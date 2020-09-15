@@ -73,7 +73,7 @@
     "mockserver": "node test/lib/ventcube_mockserver.js",
     "test:integration:mock": "npm run mockserver &",
     "test:integration:mock-win": "START /B \"\" npm run mockserver",
-    "test:integration:clean": "node node_modules/fkill-cli/cli.js -f -s :10502",
+    "test:integration:clean": "node node_modules/fkill-cli/cli.js -s :10502",
     "test:integration:complete": "npm run test:integration:clean && npm run test:integration:mock && npm run test:integration && npm run test:integration:clean",
     "test:integration:complete-win": "npm run test:integration:clean && npm run test:integration:mock-win && npm run test:integration && npm run test:integration:clean"
   },

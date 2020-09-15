@@ -20,6 +20,8 @@ declare global {
             port: number;
             interval: number;
             advancedfunctions: boolean;
+            reconnectattempts: number;
+            reconnectdelayms: number;
         }
     }
 }
@@ -44,10 +46,8 @@ export class SchwoererVentcube extends utils.Adapter {
         // Initialize your adapter here
         try {
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
-            this.log.debug("config server: " + this.config.server);
-            this.log.debug("config port: " + this.config.port);
-            this.log.debug("config interval: " + this.config.interval);
-            this.log.debug("config advancedfunctions: " + this.config.advancedfunctions);
+            this.log.debug("config: " + this.config);
+
 
             //Setup state objects for Schwoerer parameters
             for (const [func, attributes] of Object.entries(SchwoererParameter)) {
@@ -102,7 +102,7 @@ export class SchwoererVentcube extends utils.Adapter {
             this.subscribeStates("parameters.*");
 
             this.log.info("Starting connector");
-            this.connector = new Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval);
+            this.connector = new Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval, this.config.reconnectattempts, this.config.reconnectdelayms);
             this.connector.initializeSocket();
 
             this.log.debug("Connecting");

@@ -5,11 +5,15 @@ const Modbus = require("jsmodbus");
 const net_1 = require("net");
 const parameters_1 = require("./schwoerer/parameters");
 class Connector {
-    constructor(ventcube, server, port, useAdvancedFunctions, interval = 30) {
+    constructor(ventcube, server, port, useAdvancedFunctions, interval, reconnectAttempts, reconnectDelayMs) {
+        this.isConnected = false;
+        this.isReconnecting = false;
         this.server = server;
         this.port = port;
         this.readInterval = interval;
         this.useAdvancedFunctions = useAdvancedFunctions;
+        this.reconnectAttempts = reconnectAttempts;
+        this.reconnectDelayMs = reconnectDelayMs;
         this.socket = new net_1.Socket();
         this.client = new Modbus.client.TCP(this.socket);
         this.context = ventcube;
@@ -18,6 +22,17 @@ class Connector {
         this.context.log.info("Connecting to server " + this.server + ":" + this.port);
         this.socket.connect({ host: this.server, port: this.port });
         this.socket.setKeepAlive(true, 5000);
+    }
+    reconnect(attempt = 0) {
+        if (this.isConnected)
+            return;
+        if (attempt >= this.reconnectAttempts)
+            return;
+        this.isReconnecting = true;
+        this.context.log.info("Attempting to reconnect to server. (attempt " + (attempt + 1) + " out of " + this.reconnectAttempts + ")");
+        this.socket.connect({ host: this.server, port: this.port });
+        this.socket.setKeepAlive(true, 5000);
+        setTimeout(function () { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
     }
     handleErrors(err) {
         if (Modbus.errors.isUserRequestError(err)) {
@@ -43,7 +58,12 @@ class Connector {
     initializeSocket() {
         this.socket.on("connect", () => {
             this.context.log.info("Established connection. Starting processing");
+            this.isConnected = true;
+            this.isReconnecting = false;
             this.readFunctionStates(this.context.syncReadData.bind(this.context));
+        });
+        this.socket.on("timeout", () => {
+            this.context.log.warn("Received timeout from server " + this.server + ":" + this.port);
         });
         this.socket.on("error", (error) => {
             this.context.log.error("ERROR: " + error);
@@ -78,6 +98,17 @@ class Connector {
             callback(func, responseValue, new Date());
         })
             .catch((error) => {
+            switch (error.err) {
+                case "Offline":
+                    this.isConnected = false;
+                    if (!this.isReconnecting) {
+                        this.context.log.warn("Ventcube server seems offline. Data will be retrieved after next successful reconnect.");
+                        this.reconnect();
+                    }
+                    break;
+            }
+        })
+            .catch((error) => {
             this.context.log.error(error.message);
         });
     }
@@ -93,6 +124,17 @@ class Connector {
             this.context.log.silly("Transfer Time: " + metrics.transferTime);
             this.context.log.silly("Response Function Code: " + response.body.fc);
             this.context.syncReadData(func, value, new Date());
+        })
+            .catch((error) => {
+            switch (error.err) {
+                case "Offline":
+                    this.isConnected = false;
+                    if (!this.isReconnecting) {
+                        this.context.log.warn("Ventcube server is offline. Please try to update state after successful reconnect again.");
+                        this.reconnect();
+                    }
+                    break;
+            }
         })
             .catch((error) => {
             this.context.log.error(error.message + "Response: " + error.response.body.message + " code: " + error.response.body.code);

@@ -3,10 +3,13 @@
 
 [![NPM version](http://img.shields.io/npm/v/iobroker.schwoerer-ventcube.svg)](https://www.npmjs.com/package/iobroker.schwoerer-ventcube)
 [![Downloads](https://img.shields.io/npm/dm/iobroker.schwoerer-ventcube.svg)](https://www.npmjs.com/package/iobroker.schwoerer-ventcube)
+[![Dependency Status](https://img.shields.io/david/Excodibur/iobroker.schwoerer-ventcube.svg)](https://david-dm.org/Excodibur/iobroker.schwoerer-ventcube)
+
 ![Number of Installations (latest)](http://iobroker.live/badges/schwoerer-ventcube-installed.svg)
 ![Number of Installations (stable)](http://iobroker.live/badges/schwoerer-ventcube-stable.svg)
-[![Dependency Status](https://img.shields.io/david/Excodibur/iobroker.schwoerer-ventcube.svg)](https://david-dm.org/Excodibur/iobroker.schwoerer-ventcube)
-[![Known Vulnerabilities](https://snyk.io/test/github/Excodibur/ioBroker.schwoerer-ventcube/badge.svg)](https://snyk.io/test/github/Excodibur/ioBroker.schwoerer-ventcube)
+
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Excodibur/ioBroker.schwoerer-ventcube.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Excodibur/ioBroker.schwoerer-ventcube/context:javascript)
+![Github release status](https://github.com/Excodibur/iobroker.schwoerer-ventcube/workflows/Build%2C%20Test%20and%20Release/badge.svg)
 [![Travis-CI](http://img.shields.io/travis/excodibur/ioBroker.schwoerer-ventcube/master.svg)](https://travis-ci.org/Excodibur/ioBroker.schwoerer-ventcube)
 
 [![NPM](https://nodei.co/npm/iobroker.schwoerer-ventcube.png?downloads=true)](https://nodei.co/npm/iobroker.schwoerer-ventcube/)
@@ -33,12 +36,14 @@ All parameters mentioned in the specification referenced below were added to the
 The following default config-values likely will need to be changed during adapter deployment for it to connect to Ventcube properly:
 | Parameter   | Default Value | **Should be** | Explanation |
 |-------------|---------------|---------------|-------------|
-| `server`    | localhost | ***HERMES-LT*** or ***local network IP of Ventcube*** | Default value is used for tests and definitely needs to be changed! |
-| `port`      | 10502 | ***502*** | Default value is used for tests and definitely needs to be changed! |
-| `interval`  | 30 | 30 | After how many seconds should metrics be refreshed from server |
-| `advanced functions` | &#10003; | | While basic functions might be sufficient if Ventcube is just used for air ventilation, advanced functions should be checked if heating/cooling functions, or system metrics (error codes, fan details) are needed. |
+| `Server`    | localhost | ***HERMES-LT*** or ***local network IP of Ventcube*** | Default value is used for tests and definitely needs to be changed! |
+| `Port`      | 10502 | ***502*** | Default value is used for tests and definitely needs to be changed! |
+| `Interval`  | 30 | 30 | After how many seconds should metrics be refreshed from server |
+| `Reconnection Attempts` | 10 | 10 | In case connection is lost to Ventcube, how many times a reconnect should be attempted? |
+| `Delay between reconnection attempts` | 10000 | 10000 | How long to wait between reconnection attempts (in milliseconds) |
+| `Advanced Functions` | &#10003; | | While basic functions might be sufficient if Ventcube is just used for air ventilation, advanced functions should be checked if heating/cooling functions, or system metrics (error codes, fan details) are needed. |
 
-#### Most interesting parameters
+#### Interesting functions (to start with)
 - Betriebsart, changeable
 - Stoßlüftung (30 minute level 4 air burst), changeable
 - Ist Temp Raum 1 (temperature inside house)
