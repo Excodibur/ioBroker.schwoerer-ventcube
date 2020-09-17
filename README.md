@@ -22,8 +22,8 @@ Adapter for Schwoererhaus Ventcube system. More information about Ventcube Fresh
 
 ### Preconditions
 In order to access the network-interface of Ventcube the following (known) preconditions need to be met:
-- The Ventcube needs to be connected to you internal network (usually via standard RJ45-cable)
-- Modbus TCP interface needs to be supported (Control-Panel: >= V1.05, VentCube: >= V02.11) and usally has to be enabled manually first
+- The Ventcube needs to be connected to your internal network (usually via network-cable)
+- Modbus TCP interface needs to be supported (Control-Panel: >= V1.05, VentCube: >= V02.11) and often has to be enabled manually first
     * On Control Panel login to "Service" section (use standard password from docs)
 	* In Basic Settings check that Network Connection is established and "9. Network Interface" and "10. Modbus TCP" are both active.
 	* If the last two settings are not active, activate them and restart the Ventcube (e.g. by cutting the power temporarily)
@@ -39,15 +39,15 @@ The following default config-values likely will need to be changed during adapte
 | `Server`    | localhost | ***HERMES-LT*** or ***local network IP of Ventcube*** | Default value is used for tests and definitely needs to be changed! |
 | `Port`      | 10502 | ***502*** | Default value is used for tests and definitely needs to be changed! |
 | `Interval`  | 30 | 30 | After how many seconds should metrics be refreshed from server |
-| `Reconnection Attempts` | 10 | 10 | In case connection is lost to Ventcube, how many times a reconnect should be attempted? |
+| `Reconnection Attempts` | 10 | 10 | In case connection is lost to Ventcube, how many times a reconnect should be attempted |
 | `Delay between reconnection attempts` | 10000 | 10000 | How long to wait between reconnection attempts (in milliseconds) |
-| `Advanced Functions` | &#10003; | | While basic functions might be sufficient if Ventcube is just used for air ventilation, advanced functions should be checked if heating/cooling functions, or system metrics (error codes, fan details) are needed. |
+| `Advanced Functions` | &#10003; | | While basic functions might be sufficient if Ventcube is just used for air ventilation, advanced functions should be activated if heating/cooling functions, or system metrics (error codes, fan details) are needed. |
 
 #### Interesting functions (to start with)
-- Betriebsart, changeable
-- Stoßlüftung (30 minute level 4 air burst), changeable
-- Ist Temp Raum 1 (temperature inside house)
-- T10 Außentemperatur
+- ***Betriebsart***, changeable
+- ***Stoßlüftung*** (30 minute level 4 air burst), changeable
+- ***Ist Temp Raum 1*** (temperature inside house)
+- ***T10 Außentemperatur***
 
 ### Reference system
 The ioBroker adapter was tested sucessfully with:
