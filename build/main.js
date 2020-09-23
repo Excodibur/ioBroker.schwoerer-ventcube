@@ -43,12 +43,26 @@ class SchwoererVentcube extends utils.Adapter {
                 //Add some optional parameters to config
                 if (attributes.value_def.unit)
                     commonSettings.unit = attributes.value_def.unit;
-                if (attributes.value_type == "choice")
+                if (attributes.value_type == "choice") {
                     commonSettings.states = attributes.value_def;
+                    const numberOfKeys = Object.keys(attributes.value_def).length;
+                    if (numberOfKeys == 2)
+                        (mayWrite) ? commonSettings.role = "switch" : commonSettings.role = "sensor";
+                    else
+                        (mayWrite) ? commonSettings.role = "level.mode" : commonSettings.role = "value";
+                }
                 if (attributes.value_type == "range") {
                     commonSettings.min = attributes.value_def.min;
                     commonSettings.max = attributes.value_def.max;
                 }
+                //Set some more specific roles
+                if (attributes.value_def.unit == "°C")
+                    (mayWrite) ? commonSettings.role = "level.temperature" : commonSettings.role = "value.temperature";
+                if (attributes.value_def.unit == "rpm")
+                    commonSettings.role = "value.speed";
+                //Individual treatment for special cases
+                if (attributes.common_role_overwrite)
+                    commonSettings.role = attributes.common_role_overwrite;
                 await this.setObjectNotExistsAsync("parameters." + func, {
                     type: "state",
                     common: commonSettings,
@@ -70,7 +84,7 @@ class SchwoererVentcube extends utils.Adapter {
             // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
             this.subscribeStates("parameters.*");
             this.log.info("Starting connector");
-            this.connector = new connector_1.Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval, this.config.reconnectattempts, this.config.reconnectdelayms);
+            this.connector = new connector_1.Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval, this.config.reconnectattempts, this.config.reconnectdelayms, this.config.requesttimeoutms);
             this.connector.initializeSocket();
             this.log.debug("Connecting");
             this.connector.connect();

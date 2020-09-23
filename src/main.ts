@@ -22,6 +22,7 @@ declare global {
             advancedfunctions: boolean;
             reconnectattempts: number;
             reconnectdelayms: number;
+            requesttimeoutms: number;
         }
     }
 }
@@ -48,7 +49,6 @@ export class SchwoererVentcube extends utils.Adapter {
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
             this.log.debug("config: " + this.config);
 
-
             //Setup state objects for Schwoerer parameters
             for (const [func, attributes] of Object.entries(SchwoererParameter)) {
                 //Potentially skip parameters marked as "advanced"
@@ -70,11 +70,34 @@ export class SchwoererVentcube extends utils.Adapter {
 
                 //Add some optional parameters to config
                 if (attributes.value_def.unit) commonSettings.unit = attributes.value_def.unit;
-                if (attributes.value_type == "choice") commonSettings.states = attributes.value_def;
+
+                if (attributes.value_type == "choice") {
+                    commonSettings.states = attributes.value_def;
+
+                    const numberOfKeys = Object.keys(attributes.value_def).length;
+                    if (numberOfKeys == 2)
+                        (mayWrite) ? commonSettings.role = "switch" : commonSettings.role = "sensor";
+                    else
+                        (mayWrite) ? commonSettings.role = "level.mode" : commonSettings.role = "value";
+
+                }
+
                 if (attributes.value_type == "range") {
                     commonSettings.min = attributes.value_def.min;
                     commonSettings.max = attributes.value_def.max;
                 }
+
+                //Set some more specific roles
+                if (attributes.value_def.unit == "°C")
+                    (mayWrite) ? commonSettings.role = "level.temperature" : commonSettings.role = "value.temperature";
+
+
+                if (attributes.value_def.unit == "rpm")
+                    commonSettings.role = "value.speed";
+
+                //Individual treatment for special cases
+                if (attributes.common_role_overwrite)
+                    commonSettings.role = attributes.common_role_overwrite;
 
                 await this.setObjectNotExistsAsync("parameters." + func, {
                     type: "state",
@@ -102,7 +125,16 @@ export class SchwoererVentcube extends utils.Adapter {
             this.subscribeStates("parameters.*");
 
             this.log.info("Starting connector");
-            this.connector = new Connector(this, this.config.server, this.config.port, this.config.advancedfunctions, this.config.interval, this.config.reconnectattempts, this.config.reconnectdelayms);
+            this.connector = new Connector(
+                this,
+                this.config.server,
+                this.config.port,
+                this.config.advancedfunctions,
+                this.config.interval,
+                this.config.reconnectattempts,
+                this.config.reconnectdelayms,
+                this.config.requesttimeoutms
+            );
             this.connector.initializeSocket();
 
             this.log.debug("Connecting");
@@ -115,7 +147,7 @@ export class SchwoererVentcube extends utils.Adapter {
     }
 
 
-    public syncReadData(func: string, value: number, time: Date) : void {
+    public syncReadData(func: string, value: number, time: Date): void {
         //handle
         this.log.debug("Updating state: " + func + " with value: " + value);
 
@@ -175,7 +207,7 @@ export class SchwoererVentcube extends utils.Adapter {
         }
     }
 
-    private performManualStateChange(func: string, value: any) : void {
+    private performManualStateChange(func: string, value: any): void {
         //Apparently temperatures (°C) are stored as 3 digit numbers in Ventcube, but as we parse them
         //like xxx => xx.x °C we need to reverse this before updating
         const unit = SchwoererParameter[func].value_def.unit;

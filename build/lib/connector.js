@@ -5,7 +5,7 @@ const Modbus = require("jsmodbus");
 const net_1 = require("net");
 const parameters_1 = require("./schwoerer/parameters");
 class Connector {
-    constructor(ventcube, server, port, useAdvancedFunctions, interval, reconnectAttempts, reconnectDelayMs) {
+    constructor(ventcube, server, port, useAdvancedFunctions, interval, reconnectAttempts, reconnectDelayMs, requestTimeoutMs) {
         this.isConnected = false;
         this.isReconnecting = false;
         this.server = server;
@@ -14,8 +14,9 @@ class Connector {
         this.useAdvancedFunctions = useAdvancedFunctions;
         this.reconnectAttempts = reconnectAttempts;
         this.reconnectDelayMs = reconnectDelayMs;
+        this.requestTimeoutMs = requestTimeoutMs;
         this.socket = new net_1.Socket();
-        this.client = new Modbus.client.TCP(this.socket);
+        this.client = new Modbus.client.TCP(this.socket, 1, this.requestTimeoutMs);
         this.context = ventcube;
     }
     connect() {
@@ -32,7 +33,7 @@ class Connector {
         this.context.log.info("Attempting to reconnect to server. (attempt " + (attempt + 1) + " out of " + this.reconnectAttempts + ")");
         this.socket.connect({ host: this.server, port: this.port });
         this.socket.setKeepAlive(true, 5000);
-        setTimeout(function () { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
+        this.reconnectTimerId = setTimeout(function () { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
     }
     handleErrors(err) {
         if (Modbus.errors.isUserRequestError(err)) {
@@ -60,6 +61,7 @@ class Connector {
             this.context.log.info("Established connection. Starting processing");
             this.isConnected = true;
             this.isReconnecting = false;
+            this.context.setState("info.connection", true, true);
             this.readFunctionStates(this.context.syncReadData.bind(this.context));
         });
         this.socket.on("timeout", () => {
@@ -81,7 +83,7 @@ class Connector {
                 this.readDataFromHoldingRegister(callback, func, attributes.modbus_r);
             }
         }
-        setTimeout(function () { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
+        this.readTimerId = setTimeout(function () { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
     }
     readDataFromHoldingRegister(callback, func, register, fields = 1) {
         this.context.log.silly("Reading register: " + register);
@@ -142,6 +144,9 @@ class Connector {
     }
     close() {
         this.context.log.info("Shutting down connection.");
+        this.context.setState("info.connection", false, true);
+        clearTimeout(this.reconnectTimerId);
+        clearTimeout(this.readTimerId);
         this.socket.end();
     }
 }

@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "schwoerer-ventcube",
-        "version": "1.2.0",
+        "version": "1.3.0",
         "news": {
+            "1.3.0": {
+                "en": "Added new parameter ***request timeout***\nAdded info channel to inform about adapter status\nRedefined state roles to describe available data better\nImprovements to Adapter termination process",
+                "de": "Neuer Parameter ***Anforderungszeitlimit*** hinzugefügt \nInfokanal hinzugefügt, um über den Adapterstatus zu informieren\nStatusrollen neu definiert, um verfügbare Daten besser zu beschreiben\nVerbesserungen beim Beenden des Adapters",
+                "ru": "Добавлен новый параметр ***таймаут запроса*** \nДобавлен информационный канал для информирования о статусе адаптера\nПереопределены роли состояний для лучшего описания доступных данных\nУлучшения в процессе завершения работы адаптера",
+                "pt": "Adicionado novo parâmetro ***tempo limite de solicitação*** \nAdicionado canal de informações para informar sobre o status do adaptador\nFunções de estado redefinidas para descrever melhor os dados disponíveis\nMelhorias no processo de terminação do adaptador",
+                "nl": "Nieuwe parameter toegevoegd ***time-out verzoek*** \nInfokanaal toegevoegd om te informeren over de adapterstatus\nOpnieuw gedefinieerde statusrollen om beschikbare gegevens beter te beschrijven\nVerbeteringen aan het beëindigingsproces van de adapter",
+                "fr": "Ajout d'un nouveau paramètre ***timeout de la demande*** \nAjout d'un canal d'information pour informer sur l'état de l'adaptateur\nRôles d'état redéfinis pour mieux décrire les données disponibles\nAméliorations du processus de terminaison de l'adaptateur",
+                "it": "Aggiunto nuovo parametro ***timeout richiesta*** \nAggiunto canale informativo per informare sullo stato dell'adattatore\nRuoli di stato ridefiniti per descrivere meglio i dati disponibili\nMiglioramenti al processo di terminazione dell'adattatore",
+                "es": "Se agregó un nuevo parámetro ***tiempo de espera de solicitud*** \nCanal de información agregado para informar sobre el estado del adaptador\nRoles estatales redefinidos para describir mejor los datos disponibles\nMejoras en el proceso de terminación del adaptador",
+                "pl": "Dodano nowy parametr ***limit czasu żądania*** \nDodano kanał informacyjny informujący o stanie karty\nPonownie zdefiniowano role stanu, aby lepiej opisać dostępne dane\nUlepszenia procesu zakończenia adaptera",
+                "zh-cn": "添加了新参数***请求超时***\n添加了信息通道以通知适配器状态\n重新定义状态角色以更好地描述可用数据\n适配器终止过程的改进"
+            },
             "1.2.0": {
                 "en": "Added missing reconnect behaviour in case Ventcube is not reachable\nAdded connection settings for new reconnect-behaviour\nReworked layout ouf settings page\nFixed mock-server connection handling and Windows integration tests\nMoved integration tests (windows, Linux, OSX) from Travis to Github Actions",
                 "de": "Fehlendes Wiederverbindungsverhalten für den Fall hinzugefügt, dass Ventcube nicht erreichbar ist\nVerbindungseinstellungen für neues Wiederverbindungsverhalten hinzugefügt\nÜberarbeitetes Layout der Einstellungsseite\nMock-Server-Verbindungsbehandlung und Windows-Integrationstests behoben\nDie Integrationstests (Windows, Linux, OSX) wurden von Travis nach Github Actions verschoben",
@@ -87,7 +99,7 @@
         "materialize": true,
         "dependencies": [
             {
-                "js-controller": ">=1.4.2"
+                "js-controller": ">=2.0.0"
             }
         ]
     },
@@ -97,8 +109,31 @@
         "interval": 30,
         "advancedfunctions": true,
         "reconnectattempts": 10,
-        "reconnectdelayms": 10000
+        "reconnectdelayms": 10000,
+        "requesttimeoutms": 5000
     },
     "objects": [],
-    "instanceObjects": []
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Adapter-Information"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "Whether the adapter is connected to Ventcube (Modbus-server)",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
 }

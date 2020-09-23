@@ -565,7 +565,8 @@ export const SchwoererParameter: { [index: string]: any } =
         {
             0: "geschlossen",
             1: "offen"
-        }
+        },
+        common_role_overwrite: "sensor.door"
     },
 
     "devicefilter-polluted":
@@ -761,7 +762,8 @@ export const SchwoererParameter: { [index: string]: any } =
             1282: "Wärmepumpe Niederdruck",
             1283: "Maximal Abtauzeit überschritten",
             1284: "Wärmepumpe Niederdruck im Kühlbetrieb"
-        }
+        },
+        common_role_overwrite: "sensor.alarm"
     },
 
     "temp-room-1": //= temp-inside?

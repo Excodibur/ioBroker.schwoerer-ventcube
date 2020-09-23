@@ -62,6 +62,18 @@ systemDictionary = {
 		"pl": "zaawansowane funkcje",
 		"zh-cn": "进阶功能"
 	},
+	"request timeout": {
+		"en": "request timeout in milliseconds",
+		"de": "Anforderungszeitlimit in Millisekunden",
+		"ru": "время ожидания запроса в миллисекундах",
+		"pt": "pedido de tempo limite em milissegundos",
+		"nl": "verzoek time-out in milliseconden",
+		"fr": "délai d'expiration de la demande en millisecondes",
+		"it": "richiesta timeout in millisecondi",
+		"es": "solicitar tiempo de espera en milisegundos",
+		"pl": "limit czasu żądania w milisekundach",
+		"zh-cn": "请求超时（以毫秒为单位）"
+	},
 	"reconnect attempts": {
 		"en": "Reconnection Attempts",
 		"de": "Wiederverbindungsversuche",

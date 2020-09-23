@@ -13,19 +13,23 @@ export class Connector {
     private useAdvancedFunctions: boolean;
     private reconnectAttempts: number;
     private reconnectDelayMs: number;
+    private requestTimeoutMs: number;
     private isConnected: boolean = false;
     private isReconnecting: boolean = false;
+    private readTimerId: ReturnType<typeof setTimeout>;
+    private reconnectTimerId: ReturnType<typeof setTimeout>;
 
-    public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number, reconnectAttempts: number, reconnectDelayMs: number) {
+    public constructor(ventcube: SchwoererVentcube, server: string, port: number, useAdvancedFunctions: boolean, interval: number, reconnectAttempts: number, reconnectDelayMs: number, requestTimeoutMs: number) {
         this.server = server;
         this.port = port;
         this.readInterval = interval;
         this.useAdvancedFunctions = useAdvancedFunctions;
         this.reconnectAttempts = reconnectAttempts;
         this.reconnectDelayMs = reconnectDelayMs;
-
+        this.requestTimeoutMs = requestTimeoutMs;
+        
         this.socket = new Socket();
-        this.client = new Modbus.client.TCP(this.socket);
+        this.client = new Modbus.client.TCP(this.socket, 1, this.requestTimeoutMs);
         this.context = ventcube;
     }
 
@@ -49,7 +53,7 @@ export class Connector {
         this.socket.connect({ host: this.server, port: this.port });
         this.socket.setKeepAlive(true, 5000);
 
-        setTimeout(function (this: Connector) { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
+        this.reconnectTimerId = setTimeout(function (this: Connector) { this.reconnect(++attempt); }.bind(this), this.reconnectDelayMs);
     }
 
     private handleErrors(err: any): void {
@@ -78,8 +82,9 @@ export class Connector {
             this.context.log.info("Established connection. Starting processing");
             this.isConnected = true;
             this.isReconnecting = false;
-            this.readFunctionStates(this.context.syncReadData.bind(this.context));
+            this.context.setState("info.connection", true, true);
 
+            this.readFunctionStates(this.context.syncReadData.bind(this.context));
         });
 
         this.socket.on("timeout", () => {
@@ -107,7 +112,7 @@ export class Connector {
         }
 
 
-        setTimeout(function (this: Connector) { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
+        this.readTimerId = setTimeout(function (this: Connector) { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
     }
 
     public readDataFromHoldingRegister(callback: (func: string, value: any, time: Date) => void, func: string, register: number, fields: number = 1): any {
@@ -177,6 +182,9 @@ export class Connector {
 
     public close(): void {
         this.context.log.info("Shutting down connection.");
+        this.context.setState("info.connection", false, true);
+        clearTimeout(this.reconnectTimerId);
+        clearTimeout(this.readTimerId);
         this.socket.end();
     }
 }

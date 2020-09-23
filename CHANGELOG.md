@@ -3,6 +3,13 @@
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+## 1.3.0 (2020-09-23)
+* Added new parameter ***request timeout***
+* Added info channel to inform about adapter status
+* Redefined state roles to describe available data better
+* Improvements to Adapter termination process
+
+
 ## 1.2.0 (2020-09-15)
 * Added missing reconnect behaviour in case Ventcube is not reachable
 * Added connection settings for new reconnect-behaviour
