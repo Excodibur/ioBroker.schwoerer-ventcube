@@ -1,0 +1,14 @@
+{
+    "advanced functions": "Advanced functions",
+    "advanced settings": "Advanced Settings",
+    "basic settings": "Basic settings",
+    "connection settings": "Connection settings",
+    "description advanced functions": "This will retrieve information in addition to base functions for Ventcube, like information/options about heating, cooling, fan lifetime, program settings. Use with care!",
+    "interval": "Refresh interval (s)",
+    "port": "Port",
+    "reconnect attempts": "Reconnection Attempts",
+    "reconnect delay ms": "Delay between reconnection attempts (ms)",
+    "request timeout": "Request timeout in milliseconds",
+    "schwoerer-ventcube adapter settings": "Adapter settings for schwoerer-ventcube",
+    "server": "Server"
+}

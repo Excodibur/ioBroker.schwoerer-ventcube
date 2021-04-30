@@ -1,0 +1,77 @@
+{
+    "type": "tabs",
+    "i18n": true,
+    "items": {
+        "basicSettingsTab": {
+            "type": "panel",
+            "label": "basic settings",
+            "i18n": true,
+            "items": {
+                "server": {
+                    "type": "text",
+                    "label": "server",
+                    "sm": 12,
+                    "md": 8
+                },
+                "port": {
+                    "type": "number",
+                    "label": "port",
+                    "min": 1,
+                    "max": 65565,
+                    "sm": 12,
+                    "md": 2
+                },
+                "interval": {
+                    "type": "number",
+                    "label": "interval",
+                    "sm": 12,
+                    "md": 4
+                }
+
+            }
+        },
+        "connectSettingsTab": {
+            "type": "panel",
+            "label": "connection settings",
+            "i18n": true,
+            "items": {
+                "requesttimeoutms": {
+                    "type": "number",
+                    "label": "request timeout",
+                    "sm": 12,
+                    "md": 4
+                },
+                "reconnectattempts": {
+                    "type": "number",
+                    "label": "reconnect attempts",
+                    "sm": 12,
+                    "md": 4
+                },
+                "reconnectdelayms": {
+                    "type": "number",
+                    "label": "reconnect delay ms",
+                    "sm": 12,
+                    "md": 4
+                }
+            }
+        },
+        "advancedSettingsTab": {
+            "type": "panel",
+            "label": "advanced settings",
+            "i18n": true,
+            "items": {
+                "advancedfunctions": {
+                    "type": "checkbox",
+                    "label": "advanced functions",
+                    "sm": 12,
+                    "md": 4,
+                    "lg": 3
+                },
+                "advancedfunctionsdescr": {
+                    "type": "staticText",
+                    "label": "description advanced functions"
+                }
+            }
+        }
+    }
+}

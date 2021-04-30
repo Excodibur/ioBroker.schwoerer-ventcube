@@ -3,6 +3,9 @@
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+## 1.4.0 (2021-04-30)
+* Added Admin 5 support
+
 ## 1.3.0 (2020-09-23)
 * Added new parameter ***request timeout***
 * Added info channel to inform about adapter status

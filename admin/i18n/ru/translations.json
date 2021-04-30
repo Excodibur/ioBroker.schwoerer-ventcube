@@ -1,0 +1,14 @@
+{
+    "advanced functions": "Pасширенные функции",
+    "advanced settings": "Расширенные настройки",
+    "basic settings": "Основные настройки",
+    "connection settings": "Настройки соединения",
+    "description advanced functions": "Это позволит получить информацию в дополнение к базовым функциям Ventcube, например, информацию / параметры о нагреве, охлаждении, сроке службы вентилятора, настройках программы. Используйте осторожно!",
+    "interval": "интервал (s)",
+    "port": "Por",
+    "reconnect attempts": "Попытки повторного подключения",
+    "reconnect delay ms": "Задержка между попытками переподключения (ms)",
+    "request timeout": "время ожидания запроса в миллисекундах",
+    "schwoerer-ventcube adapter settings": "Настройки адаптера для schwoerer-ventcube",
+    "server": "сервер"
+}

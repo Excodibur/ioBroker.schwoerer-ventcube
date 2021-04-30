@@ -1,0 +1,14 @@
+{
+    "advanced functions": "进阶功能",
+    "advanced settings": "高级设置",
+    "basic settings": "基本设置",
+    "connection settings": "连接设定",
+    "description advanced functions": "除了Ventcube的基本功能外，这还将检索信息，例如有关加热，冷却，风扇寿命，程序设置的信息/选项。小心使用！",
+    "interval": "间隔",
+    "port": "港口",
+    "reconnect attempts": "重新连接尝试",
+    "reconnect delay ms": "尝试重新连接之间的延迟",
+    "request timeout": "请求超时（以毫秒为单位）",
+    "schwoerer-ventcube adapter settings": "schwoerer-ventcube的适配器设置",
+    "server": "服务器"
+}

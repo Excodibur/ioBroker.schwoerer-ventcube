@@ -6,21 +6,22 @@ This section is intended for the developer.
 
 ### Scripts in `package.json`
 Several npm scripts are predefined for your convenience. You can run them using `npm run <scriptname>`
-| Script name | Description                                              |
-|-------------|----------------------------------------------------------|
-| `build`    | Re-compile the TypeScript sources.                       |
-| `watch`     | Re-compile the TypeScript sources and watch for changes. |
-| `mockserver` | Start a Ventcube (Modbus) mock-server on localhost:502 |
-| `test:ts`   | Executes the tests you defined in `*.test.ts` files.     |
-| `test:package`    | Ensures your `package.json` and `io-package.json` are valid. |
-| `test:unit`       | Tests the adapter startup with unit tests (fast, but might require module mocks to work). |
-| `test:integration`| Tests the adapter startup with an actual instance of ioBroker. |
-| `test:integration:mock`| Starts `mockserver` in background (only on Linux & OSX) |
-| `test:integration:mock-win`| Starts `mockserver` in background (only on Windows) |
-| `test:integration:complete` | Starts a **Ventcube mockserver** and runs integration tests against it. (Linux & OSX) |
-| `test:integration:complete-win` | Starts a **Ventcube mockserver** and runs integration tests against it. (Windows) |
-| `test` | Performs a minimal test run on package files and your tests. |
-| `lint` | Runs `ESLint` to check your code for formatting errors and potential bugs. |
+| Script name                     | Description                                                                               |
+|---------------------------------|-------------------------------------------------------------------------------------------|
+| `build`                         | Re-compile the TypeScript sources.                                                        |
+| `build:lang`                    | Build language files to admin/i18n from words.js                                          |
+| `watch`                         | Re-compile the TypeScript sources and watch for changes.                                  |
+| `mockserver`                    | Start a Ventcube (Modbus) mock-server on localhost:10502                                  |
+| `test:ts`                       | Executes the tests you defined in `*.test.ts` files.                                      |
+| `test:package`                  | Ensures your `package.json` and `io-package.json` are valid.                              |
+| `test:unit`                     | Tests the adapter startup with unit tests (fast, but might require module mocks to work). |
+| `test:integration`              | Tests the adapter startup with an actual instance of ioBroker.                            |
+| `test:integration:mock`         | Starts `mockserver` in background (only on Linux & OSX)                                   |
+| `test:integration:mock-win`     | Starts `mockserver` in background (only on Windows)                                       |
+| `test:integration:complete`     | Starts a **Ventcube mockserver** and runs integration tests against it. (Linux & OSX)     |
+| `test:integration:complete-win` | Starts a **Ventcube mockserver** and runs integration tests against it. (Windows)         |
+| `test`                          | Performs a minimal test run on package files and your tests.                              |
+| `lint`                          | Runs `ESLint` to check your code for formatting errors and potential bugs.                |
 
 ### Tests
 

@@ -1,0 +1,14 @@
+{
+    "advanced functions": "Erweiterte Funktionen",
+    "advanced settings": "Erweiterte Einstellungen",
+    "basic settings": "Grundeinstellungen",
+    "connection settings": "Verbindungseinstellungen",
+    "description advanced functions": "Dadurch werden zusätzlich zu den Basisfunktionen für Ventcube Informationen abgerufen, z. B. Informationen / Optionen zu Heizen, Kühlen, Lüfterlebensdauer und Programmeinstellungen. Vorsichtig verwenden!",
+    "interval": "Aktualisierungs-Intervall (s)",
+    "port": "Port",
+    "reconnect attempts": "Wiederverbindungsversuche",
+    "reconnect delay ms": "Verzögerung zwischen Wiederverbindungsversuchen (ms)",
+    "request timeout": "Anforderungszeitlimit in Millisekunden",
+    "schwoerer-ventcube adapter settings": "Adaptereinstellungen für schwoerer-ventcube",
+    "server": "Server"
+}
