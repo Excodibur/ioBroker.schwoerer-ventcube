@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "schwoerer-ventcube",
-        "version": "1.4.0",
+        "version": "1.4.1",
         "news": {
+            "1.4.1": {
+                "en": "Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAdded scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)\nadded tests for Node.js 16 Support",
+                "de": "Korrigierte Modbus-Adresse für ***T6***-Messung (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanungspriorität ***Tier 2*** hinzugefügt (eingeführt mit JS-Controller 3.3.0)\nTests für Node.js 16 Support hinzugefügt",
+                "ru": "Исправленный адрес Modbus для измерения ***T6*** (выпуск № 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nДобавлен приоритет планирования ***Tier 2*** (введен в JS-Controller 3.3.0) \nдобавлены тесты для поддержки Node.js 16",
+                "pt": "Endereço Modbus corrigido para medição ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nAdicionada prioridade de agendamento ***Camada 2*** (introduzida com JS-Controller 3.3.0) \ntestes adicionados para suporte Node.js 16",
+                "nl": "Gecorrigeerd Modbus-adres voor ***T6***-meting (probleem #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanningsprioriteit toegevoegd ***Tier 2*** (geïntroduceerd met JS-Controller 3.3.0)\ntoegevoegde tests voor Node.js 16-ondersteuning",
+                "fr": "Adresse Modbus corrigée pour la mesure ***T6*** (problème #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAjout de la priorité de planification ***Tier 2*** (introduit avec JS-Controller 3.3.0)\ntests ajoutés pour la prise en charge de Node.js 16",
+                "it": "Indirizzo Modbus corretto per la misurazione ***T6*** (edizione #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAggiunta priorità di pianificazione ***Tier 2*** (introdotto con JS-Controller 3.3.0)\ntest aggiunti per Node.js 16 Support",
+                "es": "Se corrigió la dirección Modbus para la medición ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nPrioridad de programación agregada ***Nivel 2*** (introducido con JS-Controller 3.3.0) \npruebas agregadas para el soporte de Node.js 16",
+                "pl": "Poprawiony adres Modbus dla pomiaru ***T6*** (Wydanie #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nDodano priorytet planowania ***Poziom 2*** (wprowadzony z JS-Controller 3.3.0)\ndodane testy obsługi Node.js 16",
+                "zh-cn": "修正 ***T6*** 测量的 Modbus 地址（问题 #60）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60]，（PR #61）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60] .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\n添加调度优先级***Tier 2***（JS-Controller 3.3.0引入）\n添加了对 Node.js 16 支持的测试"
+            },
             "1.4.0": {
                 "en": "Added Admin 5 support",
                 "de": "Admin 5-Unterstützung hinzugefügt",
@@ -110,6 +122,7 @@
         "dataSource": "poll",
         "materialize": true,
         "jsonConfig": true,
+        "tier": 2,
         "dependencies": [
             {
                 "js-controller": ">=2.0.0"

@@ -3,6 +3,11 @@
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+## 1.4.1 (2021-06-05)
+* Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]
+* Added scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)
+* (Development) added tests for Node.js 16 Support
+
 ## 1.4.0 (2021-04-30)
 * Added Admin 5 support
 
