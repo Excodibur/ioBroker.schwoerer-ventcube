@@ -415,7 +415,7 @@ export const SchwoererParameter: { [index: string]: any } =
     {
         descr: "T6 im WT",
         category: "advanced",
-        modbus_r: 204,
+        modbus_r: 205,
         modbus_w: -1,
         value_type: "range",
         value_def: {
