@@ -3,6 +3,9 @@
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+## 1.4.2 (2021-08-08)
+* Removed test configuration from default adapter values
+
 ## 1.4.1 (2021-06-05)
 * Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]
 * Added scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)

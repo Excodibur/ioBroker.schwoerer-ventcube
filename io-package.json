@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "schwoerer-ventcube",
-        "version": "1.4.1",
+        "version": "1.4.2",
         "news": {
+            "1.4.2": {
+                "en": "Removed test configuration from default adapter values",
+                "de": "Testkonfiguration aus Standardadapterwerten entfernt",
+                "ru": "Удалена тестовая конфигурация из значений адаптера по умолчанию",
+                "pt": "Removida a configuração de teste dos valores padrão do adaptador",
+                "nl": "Testconfiguratie verwijderd uit standaard adapterwaarden",
+                "fr": "Suppression de la configuration de test des valeurs d'adaptateur par défaut",
+                "it": "Rimossa la configurazione di prova dai valori di default dell'adattatore",
+                "es": "Se eliminó la configuración de prueba de los valores predeterminados del adaptador.",
+                "pl": "Usunięto konfigurację testową z domyślnych wartości adaptera",
+                "zh-cn": "从默认适配器值中删除了测试配置"
+            },
             "1.4.1": {
                 "en": "Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAdded scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)\nadded tests for Node.js 16 Support",
                 "de": "Korrigierte Modbus-Adresse für ***T6***-Messung (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanungspriorität ***Tier 2*** hinzugefügt (eingeführt mit JS-Controller 3.3.0)\nTests für Node.js 16 Support hinzugefügt",
