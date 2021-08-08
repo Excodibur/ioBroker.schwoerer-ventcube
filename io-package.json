@@ -130,8 +130,8 @@
         ]
     },
     "native": {
-        "server": "localhost",
-        "port": 10502,
+        "server": "HERMES-LT",
+        "port": 502,
         "interval": 30,
         "advancedfunctions": true,
         "reconnectattempts": 10,
