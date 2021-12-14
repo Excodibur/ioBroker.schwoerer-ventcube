@@ -5,7 +5,7 @@
     "connection settings": "Configurações de conexão",
     "description advanced functions": "Isso irá recuperar informações além das funções básicas para Ventcube, como informações / opções sobre aquecimento, resfriamento, vida útil do ventilador, configurações do programa. Use com cuidado!",
     "interval": "Intervalo (s)",
-    "port": "Port",
+    "port": "Porta",
     "reconnect attempts": "Tentativas de reconexão",
     "reconnect delay ms": "Atraso entre tentativas de reconexão (ms)",
     "request timeout": "Pedido de tempo limite em milissegundos",
