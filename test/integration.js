@@ -32,14 +32,14 @@ tests.integration(path.join(__dirname, ".."), {
                 return new Promise(async (resolve, reject) => {
                     const harness = getHarness();
 
-                    harness._objects.getObject("system.adapter.schwoerer-ventcube.0", async (err, obj) => {
+                    harness.objects.getObject("system.adapter.schwoerer-ventcube.0", async (err, obj) => {
                         if (err)
                             reject(new Error("Can't modify adapter configuration to prepare testcase. Error: " + err));
 
                         obj.native.server = "localhost";
                         obj.native.port = 10502;
 
-                        harness._objects.setObject(obj._id, obj);
+                        await harness.changeAdapterConfig("schwoerer-ventcube", obj);
 
                         await harness.startAdapterAndWait()
 
@@ -71,14 +71,14 @@ tests.integration(path.join(__dirname, ".."), {
                 return new Promise(async (resolve, reject) => {
                     const harness = getHarness();
 
-                    harness._objects.getObject("system.adapter.schwoerer-ventcube.0", async (err, obj) => {
+                    harness.objects.getObject("system.adapter.schwoerer-ventcube.0", async (err, obj) => {
                         if (err)
                             reject(new Error("Can't modify adapter configuration to prepare testcase. Error: " + err));
 
                         obj.native.server = "localhost";
                         obj.native.port = 10502;
 
-                        harness._objects.setObject(obj._id, obj);
+                        await harness.changeAdapterConfig("schwoerer-ventcube", obj);
 
                         await harness.startAdapterAndWait()
 
