@@ -112,7 +112,7 @@ tests.integration(path.join(__dirname, ".."), {
                         });
                     });
 
-                }).timeout(30000);;
+                }).timeout(50000);;
             });
         });
     }
