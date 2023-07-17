@@ -28,6 +28,7 @@
   "devDependencies": {
     "@alcalzone/release-script": "^3.5.9",
     "@alcalzone/release-script-plugin-iobroker": "^3.5.9",
+    "@iobroker/adapter-dev": "^1.2.0",
     "@iobroker/testing": "^4.1.0",
     "@types/chai": "^4.3.5",
     "@types/chai-as-promised": "^7.1.5",
@@ -59,7 +60,7 @@
   "main": "build/main.js",
   "scripts": {
     "prebuild": "rimraf ./build",
-    "build:lang": "gulp adminWords2languages",
+    "translate": "translate-adapter",
     "build:ts": "tsc -p tsconfig.build.json",
     "build": "npm run build:ts",
     "check": "npm run build -- --noEmit",
