@@ -31,7 +31,6 @@
 
 		"sourceMap": false,
 		"inlineSourceMap": false,
-		"watch": false,
 		"strictPropertyInitialization": false
 	},
 	"include": [
