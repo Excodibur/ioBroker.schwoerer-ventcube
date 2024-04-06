@@ -22,7 +22,7 @@
     "url": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^3.0.4",
+    "@iobroker/adapter-core": "^3.0.6",
     "jsmodbus": "^4.0.10"
   },
   "devDependencies": {
