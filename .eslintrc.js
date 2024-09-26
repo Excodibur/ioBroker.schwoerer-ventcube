@@ -8,13 +8,13 @@ module.exports = {
 	extends: [
 		"plugin:@typescript-eslint/recommended", // Uses the recommended rules from the @typescript-eslint/eslint-plugin
 	],
-	plugins: [],
+	plugins: [
+        "@stylistic/js"
+    ],
 	rules: {
-		"indent": "off",
-		"@typescript-eslint/indent": [
-			"error",
-			4
-		],
+		"@stylistic/js/indent": [ "error",
+			4,
+            { "SwitchCase": 1 }],
 		"quotes": [
 			"error",
 			"double",

@@ -14,8 +14,8 @@ export class Connector {
     private reconnectAttempts: number;
     private reconnectDelayMs: number;
     private requestTimeoutMs: number;
-    private isConnected: boolean = false;
-    private isReconnecting: boolean = false;
+    private isConnected = false;
+    private isReconnecting = false;
     private readTimerId: ReturnType<typeof setTimeout>;
     private reconnectTimerId: ReturnType<typeof setTimeout>;
 
@@ -27,7 +27,7 @@ export class Connector {
         this.reconnectAttempts = reconnectAttempts;
         this.reconnectDelayMs = reconnectDelayMs;
         this.requestTimeoutMs = requestTimeoutMs;
-        
+
         this.socket = new Socket();
         this.client = new Modbus.client.TCP(this.socket, 1, this.requestTimeoutMs);
         this.context = ventcube;
@@ -39,7 +39,7 @@ export class Connector {
         this.socket.setKeepAlive(true, 5000);
     }
 
-    private reconnect(attempt: number = 0): void {
+    private reconnect(attempt = 0): void {
         if (this.isConnected)
             return;
 
@@ -115,7 +115,7 @@ export class Connector {
         this.readTimerId = setTimeout(function (this: Connector) { this.readFunctionStates(callback); }.bind(this), this.readInterval * 1000);
     }
 
-    public readDataFromHoldingRegister(callback: (func: string, value: any, time: Date) => void, func: string, register: number, fields: number = 1): any {
+    public readDataFromHoldingRegister(callback: (func: string, value: any, time: Date) => void, func: string, register: number, fields = 1): any {
         this.context.log.silly("Reading register: " + register);
 
         this.client.readHoldingRegisters(register, fields)
