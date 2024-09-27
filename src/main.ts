@@ -139,7 +139,7 @@ export class SchwoererVentcube extends utils.Adapter {
 
             this.log.debug("Connecting");
             this.connector.connect();
-        } catch (error) {
+        } catch (error: any) {
             this.log.error(error.message);
             Promise.reject(error.message);
         }

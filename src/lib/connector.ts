@@ -132,7 +132,7 @@ export class Connector {
 
                 callback(func, responseValue, new Date());
             })
-            .catch((error: Modbus.UserRequestError<any>) => {
+            .catch((error: Modbus.UserRequestError<any, any>) => {
                 switch (error.err) {
                     case "Offline":
                         this.isConnected = false;
@@ -164,7 +164,7 @@ export class Connector {
 
                 this.context.syncReadData(func, value, new Date());
             })
-            .catch((error: Modbus.UserRequestError<any>) => {
+            .catch((error: Modbus.UserRequestError<any, any>) => {
                 switch (error.err) {
                     case "Offline":
                         this.isConnected = false;

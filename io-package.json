@@ -121,7 +121,10 @@
         "keywords": [
             "Schwoererhaus"
         ],
-        "license": "MIT",
+        "licenseInformation": {
+            "license": "MIT",
+            "type": "free"
+        },
         "platform": "Javascript/Node.js",
         "icon": "schwoerer-ventcube.png",
         "enabled": true,
@@ -133,7 +136,9 @@
         "compact": true,
         "connectionType": "local",
         "dataSource": "poll",
-        "materialize": true,
+        "adminUI": {
+            "config": "json"
+        },
         "jsonConfig": true,
         "tier": 2,
         "dependencies": [

@@ -47,9 +47,9 @@ class SchwoererVentcube extends utils.Adapter {
                     commonSettings.states = attributes.value_def;
                     const numberOfKeys = Object.keys(attributes.value_def).length;
                     if (numberOfKeys == 2)
-                        (mayWrite) ? commonSettings.role = "switch" : commonSettings.role = "sensor";
+                        commonSettings.role = (mayWrite) ? "switch" : "sensor";
                     else
-                        (mayWrite) ? commonSettings.role = "level.mode" : commonSettings.role = "value";
+                        commonSettings.role = (mayWrite) ? "level.mode" : "value";
                 }
                 if (attributes.value_type == "range") {
                     commonSettings.min = attributes.value_def.min;
@@ -57,7 +57,7 @@ class SchwoererVentcube extends utils.Adapter {
                 }
                 //Set some more specific roles
                 if (attributes.value_def.unit == "°C")
-                    (mayWrite) ? commonSettings.role = "level.temperature" : commonSettings.role = "value.temperature";
+                    commonSettings.role = (mayWrite) ? "level.temperature" : "value.temperature";
                 if (attributes.value_def.unit == "rpm")
                     commonSettings.role = "value.speed";
                 //Individual treatment for special cases
@@ -102,8 +102,8 @@ class SchwoererVentcube extends utils.Adapter {
         const parameterType = parameters_1.SchwoererParameter[func].value_type;
         switch (parameterType) {
             /*case "choice":
-                    parameterParsed = SchwoererParameter[func].value_def[value];
-                break;*/
+                        parameterParsed = SchwoererParameter[func].value_def[value];
+                    break;*/
             case "range":
                 const unit = parameters_1.SchwoererParameter[func].value_def.unit;
                 switch (unit) {

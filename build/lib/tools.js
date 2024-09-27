@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.translateText = exports.isArray = exports.isObject = void 0;
+exports.isObject = isObject;
+exports.isArray = isArray;
+exports.translateText = translateText;
 const axios_1 = require("axios");
 /**
  * Tests whether the given variable is a real object and not an Array
@@ -13,7 +15,6 @@ function isObject(it) {
     // [] instanceof Object === true
     return Object.prototype.toString.call(it) === "[object Object]";
 }
-exports.isObject = isObject;
 /**
  * Tests whether the given variable is really an Array
  * @param it The variable to test
@@ -23,7 +24,6 @@ function isArray(it) {
         return Array.isArray(it);
     return Object.prototype.toString.call(it) === "[object Array]";
 }
-exports.isArray = isArray;
 /**
  * Translates text using the Google Translate API
  * @param text The text to translate
@@ -44,7 +44,6 @@ async function translateText(text, targetLang, yandexApiKey) {
         return translateGoogle(text, targetLang);
     }
 }
-exports.translateText = translateText;
 /**
  * Translates text with Yandex API
  * @param text The text to translate
@@ -58,7 +57,7 @@ async function translateYandex(text, targetLang, apiKey) {
     }
     try {
         const url = `https://translate.yandex.net/api/v1.5/tr.json/translate?key=${apiKey}&text=${encodeURIComponent(text)}&lang=en-${targetLang}`;
-        const response = await axios_1.default({ url, timeout: 15000 });
+        const response = await (0, axios_1.default)({ url, timeout: 15000 });
         if (isArray((_a = response.data) === null || _a === void 0 ? void 0 : _a.text)) {
             return response.data.text[0];
         }
@@ -77,7 +76,7 @@ async function translateGoogle(text, targetLang) {
     var _a;
     try {
         const url = `http://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=${targetLang}&dt=t&q=${encodeURIComponent(text)}&ie=UTF-8&oe=UTF-8`;
-        const response = await axios_1.default({ url, timeout: 15000 });
+        const response = await (0, axios_1.default)({ url, timeout: 15000 });
         if (isArray(response.data)) {
             // we got a valid response
             return response.data[0][0][0];
