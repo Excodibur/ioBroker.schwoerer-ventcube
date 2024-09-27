@@ -16,4 +16,6 @@ updates:
   assignees:
   - Excodibur
   versioning-strategy: increase
+  allow:
+    - dependency-type: production
   
