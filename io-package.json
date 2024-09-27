@@ -13,6 +13,7 @@
                 "it": "Rimossa la configurazione di prova dai valori di default dell'adattatore",
                 "es": "Se eliminó la configuración de prueba de los valores predeterminados del adaptador.",
                 "pl": "Usunięto konfigurację testową z domyślnych wartości adaptera",
+                "uk": "Видалити конфігурацію тесту з значень адаптера за замовчуванням",
                 "zh-cn": "从默认适配器值中删除了测试配置"
             },
             "1.4.1": {
@@ -98,6 +99,7 @@
             "it": "Schwoerer Ventcube",
             "es": "Schwoerer Ventcube",
             "pl": "Schwoerer Ventcube",
+            "uk": "Schwoerer Ventcube",
             "zh-cn": "Schwoerer Ventcube"
         },
         "desc": {
@@ -110,6 +112,7 @@
             "it": "Adattatore per sistema Schwoererhaus Ventcube",
             "es": "Adaptador para sistema Schwoererhaus Ventcube",
             "pl": "Adapter do systemu Schwoererhaus Ventcube",
+            "uk": "Адаптер для системи Schwoerhaus Ventcube",
             "zh-cn": "Schwoererhaus Ventcube系统适配器"
         },
         "authors": [
@@ -135,7 +138,7 @@
         "tier": 2,
         "dependencies": [
             {
-                "js-controller": ">=3.0.0"
+                "js-controller": ">=5.0.19"
             }
         ]
     },
