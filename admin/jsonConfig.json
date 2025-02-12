@@ -5,13 +5,15 @@
         "basicSettingsTab": {
             "type": "panel",
             "label": "basic settings",
-            "i18n": true,
             "items": {
                 "server": {
                     "type": "text",
                     "label": "server",
                     "sm": 12,
-                    "md": 8
+                    "md": 8,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "port": {
                     "type": "number",
@@ -19,13 +21,19 @@
                     "min": 1,
                     "max": 65565,
                     "sm": 12,
-                    "md": 2
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "interval": {
                     "type": "number",
                     "label": "interval",
                     "sm": 12,
-                    "md": 4
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 }
 
             }
@@ -33,43 +41,57 @@
         "connectSettingsTab": {
             "type": "panel",
             "label": "connection settings",
-            "i18n": true,
             "items": {
                 "requesttimeoutms": {
                     "type": "number",
                     "label": "request timeout",
                     "sm": 12,
-                    "md": 4
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "reconnectattempts": {
                     "type": "number",
                     "label": "reconnect attempts",
                     "sm": 12,
-                    "md": 4
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "reconnectdelayms": {
                     "type": "number",
                     "label": "reconnect delay ms",
                     "sm": 12,
-                    "md": 4
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         },
         "advancedSettingsTab": {
             "type": "panel",
             "label": "advanced settings",
-            "i18n": true,
             "items": {
                 "advancedfunctions": {
                     "type": "checkbox",
                     "label": "advanced functions",
                     "sm": 12,
                     "md": 4,
-                    "lg": 3
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 },
                 "advancedfunctionsdescr": {
                     "type": "staticText",
-                    "label": "description advanced functions"
+                    "label": "description advanced functions",
+                    "sm": 12,
+                    "md": 4,
+                    "xs": 12,
+                    "lg": 4,
+                    "xl": 4
                 }
             }
         }
