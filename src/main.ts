@@ -4,10 +4,9 @@
 
 // The adapter-core module gives you access to the core ioBroker functions
 // you need to create an adapter
-import * as utils from "@iobroker/adapter-core";
-import { Connector } from "./lib/connector";
-import { SchwoererParameter } from "./lib/schwoerer/parameters";
-
+import * as utils from '@iobroker/adapter-core';
+import { Connector } from './lib/connector';
+import { SchwoererParameter } from './lib/schwoerer/parameters';
 
 // Augment the adapter.config object with the actual types
 // TODO: delete this in the next version
@@ -33,11 +32,11 @@ export class SchwoererVentcube extends utils.Adapter {
     public constructor(options: Partial<utils.AdapterOptions> = {}) {
         super({
             ...options,
-            name: "schwoerer-ventcube",
+            name: 'schwoerer-ventcube',
         });
-        this.on("ready", this.onReady.bind(this));
-        this.on("stateChange", this.onStateChange.bind(this));
-        this.on("unload", this.onUnload.bind(this));
+        this.on('ready', this.onReady.bind(this));
+        this.on('stateChange', this.onStateChange.bind(this));
+        this.on('unload', this.onUnload.bind(this));
     }
 
     /**
@@ -47,14 +46,16 @@ export class SchwoererVentcube extends utils.Adapter {
         // Initialize your adapter here
         try {
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
-            this.log.debug("config: " + this.config);
+            this.log.debug(`config: ${JSON.stringify(this.config)}`);
 
             //Setup state objects for Schwoerer parameters
             for (const [func, attributes] of Object.entries(SchwoererParameter)) {
                 //Potentially skip parameters marked as "advanced"
-                if ((attributes.category == "advanced") && (!this.config.advancedfunctions)) continue;
+                if (attributes.category == 'advanced' && !this.config.advancedfunctions) {
+                    continue;
+                }
 
-                this.log.info("Setting up state for " + func);
+                this.log.info(`Setting up state for ${func}`);
 
                 const mayRead = attributes.modbus_r > -1 ? true : false;
                 const mayWrite = attributes.modbus_w > -1 ? true : false;
@@ -62,69 +63,71 @@ export class SchwoererVentcube extends utils.Adapter {
                 //Prepare common section for object
                 const commonSettings: ioBroker.StateCommon = {
                     name: attributes.descr,
-                    type: "number",
-                    role: "value",
+                    type: 'number',
+                    role: 'value',
                     read: mayRead,
                     write: mayWrite,
                 };
 
                 //Add some optional parameters to config
-                if (attributes.value_def.unit) commonSettings.unit = attributes.value_def.unit;
+                if (attributes.value_def.unit) {
+                    commonSettings.unit = attributes.value_def.unit;
+                }
 
-                if (attributes.value_type == "choice") {
+                if (attributes.value_type == 'choice') {
                     commonSettings.states = attributes.value_def;
 
                     const numberOfKeys = Object.keys(attributes.value_def).length;
-                    if (numberOfKeys == 2)
-                        commonSettings.role = (mayWrite) ? "switch" : "sensor";
-                    else
-                        commonSettings.role = (mayWrite) ? "level.mode" : "value";
-
+                    if (numberOfKeys == 2) {
+                        commonSettings.role = mayWrite ? 'switch' : 'sensor';
+                    } else {
+                        commonSettings.role = mayWrite ? 'level.mode' : 'value';
+                    }
                 }
 
-                if (attributes.value_type == "range") {
+                if (attributes.value_type == 'range') {
                     commonSettings.min = attributes.value_def.min;
                     commonSettings.max = attributes.value_def.max;
                 }
 
                 //Set some more specific roles
-                if (attributes.value_def.unit == "°C")
-                    commonSettings.role = (mayWrite) ? "level.temperature" : "value.temperature";
+                if (attributes.value_def.unit == '°C') {
+                    commonSettings.role = mayWrite ? 'level.temperature' : 'value.temperature';
+                }
 
-
-                if (attributes.value_def.unit == "rpm")
-                    commonSettings.role = "value.speed";
+                if (attributes.value_def.unit == 'rpm') {
+                    commonSettings.role = 'value.speed';
+                }
 
                 //Individual treatment for special cases
-                if (attributes.common_role_overwrite)
+                if (attributes.common_role_overwrite) {
                     commonSettings.role = attributes.common_role_overwrite;
+                }
 
-                await this.setObjectNotExistsAsync("parameters." + func, {
-                    type: "state",
+                await this.setObjectNotExistsAsync(`parameters.${func}`, {
+                    type: 'state',
                     common: commonSettings,
                     native: {},
                 });
 
                 //Have a corresponding "lastUpdate" object where a timestamp of data-retrieval is stored
-                await this.setObjectNotExistsAsync("lastUpdate." + func, {
-                    type: "state",
+                await this.setObjectNotExistsAsync(`lastUpdate.${func}`, {
+                    type: 'state',
                     common: {
                         name: attributes.descr,
-                        type: "string",
-                        role: "date",
+                        type: 'string',
+                        role: 'date',
                         read: mayRead,
-                        write: false
+                        write: false,
                     },
                     native: {},
                 });
             }
 
-
-
             // In order to get state updates, you need to subscribe to them. The following line adds a subscription for our variable we have created above.
-            this.subscribeStates("parameters.*");
+            this.subscribeStates('parameters.*');
 
-            this.log.info("Starting connector");
+            this.log.info('Starting connector');
             this.connector = new Connector(
                 this,
                 this.config.server,
@@ -133,23 +136,21 @@ export class SchwoererVentcube extends utils.Adapter {
                 this.config.interval,
                 this.config.reconnectattempts,
                 this.config.reconnectdelayms,
-                this.config.requesttimeoutms
+                this.config.requesttimeoutms,
             );
             this.connector.initializeSocket();
 
-            this.log.debug("Connecting");
+            this.log.debug('Connecting');
             this.connector.connect();
         } catch (error: any) {
             this.log.error(error.message);
-            Promise.reject(error.message);
+            await Promise.reject(new Error(error.message));
         }
-
     }
-
 
     public syncReadData(func: string, value: number, time: Date): void {
         //handle
-        this.log.debug("Updating state: " + func + " with value: " + value);
+        this.log.debug(`Updating state: ${func} with value: ${value}`);
 
         //parse parameter if needed
         let parameterParsed = value;
@@ -158,17 +159,18 @@ export class SchwoererVentcube extends utils.Adapter {
             /*case "choice":
                         parameterParsed = SchwoererParameter[func].value_def[value];
                     break;*/
-            case "range":
+            case 'range': {
                 const unit = SchwoererParameter[func].value_def.unit;
                 switch (unit) {
-                    case "°C":
-                        parameterParsed = (value / 10);
+                    case '°C':
+                        parameterParsed = value / 10;
                         break;
                 }
                 break;
+            }
         }
-        this.setState("parameters." + func, { val: parameterParsed, ack: true, c: "update" });
-        this.setState("lastUpdate." + func, { val: time.toString(), ack: true, c: "update" });
+        this.setState(`parameters.${func}`, { val: parameterParsed, ack: true, c: 'update' });
+        this.setState(`lastUpdate.${func}`, { val: time.toString(), ack: true, c: 'update' });
     }
 
     /**
@@ -177,17 +179,20 @@ export class SchwoererVentcube extends utils.Adapter {
     private onUnload(callback: () => void): void {
         try {
             //Terminate MODBUS connection
-            this.log.info("Shutting down adapter. Terminating Modbus connection.");
+            this.log.info('Shutting down adapter. Terminating Modbus connection.');
             this.connector.close();
             callback();
-        } catch (e) {
-            this.log.error("Error shutting down: " + e);
+        } catch (e: any) {
+            this.log.error(`Error shutting down: ${e.message}`);
             callback();
         }
     }
 
     /**
      * Is called if a subscribed state changes
+     *
+     * @param id State name (id)
+     * @param state State object
      */
     private onStateChange(id: string, state: ioBroker.State | null | undefined): void {
         if (state) {
@@ -198,7 +203,7 @@ export class SchwoererVentcube extends utils.Adapter {
             if (state.ack == false) {
                 this.log.debug(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
 
-                const func = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, "$2");
+                const func = id.toString().replace(/^.*\.(\w+)\.([\w-]+)$/, '$2');
                 this.performManualStateChange(func, state.val);
             }
         } else {
@@ -211,7 +216,7 @@ export class SchwoererVentcube extends utils.Adapter {
         //Apparently temperatures (°C) are stored as 3 digit numbers in Ventcube, but as we parse them
         //like xxx => xx.x °C we need to reverse this before updating
         const unit = SchwoererParameter[func].value_def.unit;
-        if ((unit != undefined) && (unit == "°C")) {
+        if (unit != undefined && unit == '°C') {
             value = value * 10;
         }
         //Value validation not needed, as ObjectState has all allowed values already configured.
