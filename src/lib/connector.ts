@@ -1,5 +1,5 @@
 import * as Modbus from 'jsmodbus';
-import { Socket } from 'net';
+import { Socket } from 'node:net';
 import type { SchwoererVentcube } from '../main';
 import { SchwoererParameter } from './schwoerer/parameters';
 
