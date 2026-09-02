@@ -92,6 +92,8 @@ See [Changelog](https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/ma
 * (Development) Fixed mock-server connection handling and Windows integration tests
 * (Development) Moved integration tests (windows, Linux, OSX) from Travis to Github Actions
 
+[Older changelogs can be found there](CHANGELOG_OLD.md)
+
 ## License
 MIT License
 
