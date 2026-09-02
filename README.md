@@ -67,6 +67,10 @@ See [Changelog](https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/ma
 	Placeholder for the next version (add instead of version-number-headline below):
 	## __WORK IN PROGRESS__
 -->
+
+### **WORK IN PROGRESS**
+- (ioBroker-Bot) Adapter requires js-controller >= 6.0.11 now.
+
 ### 1.4.2 (2021-08-08)
 * Removed test configuration from default adapter values
 

@@ -1,183 +1,183 @@
 {
-    "common": {
-        "name": "schwoerer-ventcube",
-        "version": "1.4.2",
-        "news": {
-            "1.4.2": {
-                "en": "Removed test configuration from default adapter values",
-                "de": "Testkonfiguration aus Standardadapterwerten entfernt",
-                "ru": "Удалена тестовая конфигурация из значений адаптера по умолчанию",
-                "pt": "Removida a configuração de teste dos valores padrão do adaptador",
-                "nl": "Testconfiguratie verwijderd uit standaard adapterwaarden",
-                "fr": "Suppression de la configuration de test des valeurs d'adaptateur par défaut",
-                "it": "Rimossa la configurazione di prova dai valori di default dell'adattatore",
-                "es": "Se eliminó la configuración de prueba de los valores predeterminados del adaptador.",
-                "pl": "Usunięto konfigurację testową z domyślnych wartości adaptera",
-                "uk": "Видалити конфігурацію тесту з значень адаптера за замовчуванням",
-                "zh-cn": "从默认适配器值中删除了测试配置"
-            },
-            "1.4.1": {
-                "en": "Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAdded scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)\nadded tests for Node.js 16 Support",
-                "de": "Korrigierte Modbus-Adresse für ***T6***-Messung (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanungspriorität ***Tier 2*** hinzugefügt (eingeführt mit JS-Controller 3.3.0)\nTests für Node.js 16 Support hinzugefügt",
-                "ru": "Исправленный адрес Modbus для измерения ***T6*** (выпуск № 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nДобавлен приоритет планирования ***Tier 2*** (введен в JS-Controller 3.3.0) \nдобавлены тесты для поддержки Node.js 16",
-                "pt": "Endereço Modbus corrigido para medição ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nAdicionada prioridade de agendamento ***Camada 2*** (introduzida com JS-Controller 3.3.0) \ntestes adicionados para suporte Node.js 16",
-                "nl": "Gecorrigeerd Modbus-adres voor ***T6***-meting (probleem #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanningsprioriteit toegevoegd ***Tier 2*** (geïntroduceerd met JS-Controller 3.3.0)\ntoegevoegde tests voor Node.js 16-ondersteuning",
-                "fr": "Adresse Modbus corrigée pour la mesure ***T6*** (problème #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAjout de la priorité de planification ***Tier 2*** (introduit avec JS-Controller 3.3.0)\ntests ajoutés pour la prise en charge de Node.js 16",
-                "it": "Indirizzo Modbus corretto per la misurazione ***T6*** (edizione #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAggiunta priorità di pianificazione ***Tier 2*** (introdotto con JS-Controller 3.3.0)\ntest aggiunti per Node.js 16 Support",
-                "es": "Se corrigió la dirección Modbus para la medición ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nPrioridad de programación agregada ***Nivel 2*** (introducido con JS-Controller 3.3.0) \npruebas agregadas para el soporte de Node.js 16",
-                "pl": "Poprawiony adres Modbus dla pomiaru ***T6*** (Wydanie #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nDodano priorytet planowania ***Poziom 2*** (wprowadzony z JS-Controller 3.3.0)\ndodane testy obsługi Node.js 16",
-                "zh-cn": "修正 ***T6*** 测量的 Modbus 地址（问题 #60）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60]，（PR #61）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60] .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\n添加调度优先级***Tier 2***（JS-Controller 3.3.0引入）\n添加了对 Node.js 16 支持的测试"
-            },
-            "1.4.0": {
-                "en": "Added Admin 5 support",
-                "de": "Admin 5-Unterstützung hinzugefügt",
-                "ru": "Добавлена поддержка Admin 5.",
-                "pt": "Adicionado suporte Admin 5",
-                "nl": "Ondersteuning toegevoegd voor Admin 5",
-                "fr": "Ajout de la prise en charge d'Admin 5",
-                "it": "Aggiunto supporto per Admin 5",
-                "es": "Se agregó compatibilidad con Admin 5",
-                "pl": "Dodano obsługę administratora 5",
-                "zh-cn": "添加了Admin 5支持"
-            },
-            "1.3.0": {
-                "en": "Added new parameter ***request timeout***\nAdded info channel to inform about adapter status\nRedefined state roles to describe available data better\nImprovements to Adapter termination process",
-                "de": "Neuer Parameter ***Anforderungszeitlimit*** hinzugefügt \nInfokanal hinzugefügt, um über den Adapterstatus zu informieren\nStatusrollen neu definiert, um verfügbare Daten besser zu beschreiben\nVerbesserungen beim Beenden des Adapters",
-                "ru": "Добавлен новый параметр ***таймаут запроса*** \nДобавлен информационный канал для информирования о статусе адаптера\nПереопределены роли состояний для лучшего описания доступных данных\nУлучшения в процессе завершения работы адаптера",
-                "pt": "Adicionado novo parâmetro ***tempo limite de solicitação*** \nAdicionado canal de informações para informar sobre o status do adaptador\nFunções de estado redefinidas para descrever melhor os dados disponíveis\nMelhorias no processo de terminação do adaptador",
-                "nl": "Nieuwe parameter toegevoegd ***time-out verzoek*** \nInfokanaal toegevoegd om te informeren over de adapterstatus\nOpnieuw gedefinieerde statusrollen om beschikbare gegevens beter te beschrijven\nVerbeteringen aan het beëindigingsproces van de adapter",
-                "fr": "Ajout d'un nouveau paramètre ***timeout de la demande*** \nAjout d'un canal d'information pour informer sur l'état de l'adaptateur\nRôles d'état redéfinis pour mieux décrire les données disponibles\nAméliorations du processus de terminaison de l'adaptateur",
-                "it": "Aggiunto nuovo parametro ***timeout richiesta*** \nAggiunto canale informativo per informare sullo stato dell'adattatore\nRuoli di stato ridefiniti per descrivere meglio i dati disponibili\nMiglioramenti al processo di terminazione dell'adattatore",
-                "es": "Se agregó un nuevo parámetro ***tiempo de espera de solicitud*** \nCanal de información agregado para informar sobre el estado del adaptador\nRoles estatales redefinidos para describir mejor los datos disponibles\nMejoras en el proceso de terminación del adaptador",
-                "pl": "Dodano nowy parametr ***limit czasu żądania*** \nDodano kanał informacyjny informujący o stanie karty\nPonownie zdefiniowano role stanu, aby lepiej opisać dostępne dane\nUlepszenia procesu zakończenia adaptera",
-                "zh-cn": "添加了新参数***请求超时***\n添加了信息通道以通知适配器状态\n重新定义状态角色以更好地描述可用数据\n适配器终止过程的改进"
-            },
-            "1.2.0": {
-                "en": "Added missing reconnect behaviour in case Ventcube is not reachable\nAdded connection settings for new reconnect-behaviour\nReworked layout ouf settings page\nFixed mock-server connection handling and Windows integration tests\nMoved integration tests (windows, Linux, OSX) from Travis to Github Actions",
-                "de": "Fehlendes Wiederverbindungsverhalten für den Fall hinzugefügt, dass Ventcube nicht erreichbar ist\nVerbindungseinstellungen für neues Wiederverbindungsverhalten hinzugefügt\nÜberarbeitetes Layout der Einstellungsseite\nMock-Server-Verbindungsbehandlung und Windows-Integrationstests behoben\nDie Integrationstests (Windows, Linux, OSX) wurden von Travis nach Github Actions verschoben",
-                "ru": "Добавлено отсутствующее поведение при повторном подключении в случае, если Ventcube недоступен.\nДобавлены настройки подключения для нового поведения при повторном подключении\nПереработан макет страницы настроек ouf\nИсправлена обработка соединения с макетом сервера и тесты интеграции Windows\nИнтеграционные тесты (windows, Linux, OSX) перенесены из Travis в Github Actions.",
-                "pt": "Adicionado comportamento de reconexão ausente no caso de Ventcube não estar acessível\nAdicionadas configurações de conexão para novo comportamento de reconexão\nPágina de configurações de layout refeita ouf\nManipulação de conexão de servidor simulado corrigida e testes de integração do Windows\nTestes de integração movidos (Windows, Linux, OSX) do Travis para o Github Actions",
-                "nl": "Ontbrekend herverbindingsgedrag toegevoegd voor het geval Ventcube niet bereikbaar is\nVerbindingsinstellingen toegevoegd voor nieuw herverbindingsgedrag\nHerwerkte layout van instellingenpagina\nVaste afhandeling van mock-server-verbindingen en Windows-integratietests\nIntegratietests (Windows, Linux, OSX) verplaatst van Travis naar Github-acties",
-                "fr": "Ajout d'un comportement de reconnexion manquant au cas où Ventcube ne serait pas accessible\nAjout des paramètres de connexion pour le nouveau comportement de reconnexion\nPage des paramètres de la mise en page retravaillée\nCorrection de la gestion des connexions au serveur simulé et des tests d'intégration Windows\nDéplacement des tests d'intégration (Windows, Linux, OSX) de Travis vers Github Actions",
-                "it": "Aggiunto comportamento di riconnessione mancante nel caso in cui Ventcube non sia raggiungibile\nAggiunte impostazioni di connessione per un nuovo comportamento di riconnessione\nPagina delle impostazioni del layout rielaborato\nRisolto il problema con la gestione della connessione mock-server e i test di integrazione di Windows\nTest di integrazione spostati (Windows, Linux, OSX) da Travis a Github Actions",
-                "es": "Se agregó un comportamiento de reconexión faltante en caso de que Ventcube no sea accesible\nSe agregaron configuraciones de conexión para un nuevo comportamiento de reconexión\nDiseño reelaborado de la página de configuración de ouf\nManejo de conexión de servidor simulado fijo y pruebas de integración de Windows\nPruebas de integración movidas (Windows, Linux, OSX) de Travis a Acciones de Github",
-                "pl": "Dodano brakujące zachowanie ponownego połączenia w przypadku, gdy Ventcube jest nieosiągalny\nDodano ustawienia połączenia dla nowego zachowania ponownego łączenia\nPrzerobiony układ strony ustawień\nNaprawiono obsługę połączenia z serwerem próbnym i testy integracji systemu Windows\nPrzeniesiono testy integracji (Windows, Linux, OSX) z Travis do Github Actions",
-                "zh-cn": "在无法访问Ventcube的情况下添加了丢失的重新连接行为\n为新的重新连接行为添加了连接设置\n重做的版面设置页面\n修复了模拟服务器连接处理和Windows集成测试\n将集成测试（Windows，Linux，OSX）从Travis移至Github Actions"
-            },
-            "1.1.2": {
-                "en": "Fixed bugs with negative function values (e.g. negative temperatures)\nAdded integration testcases and Ventcube mockserver\nImproved code quality (ESLint)\nAdded (release-script)[https://github.com/AlCalzone/release-script] to standartize build process",
-                "de": "Fehler mit negativen Funktionswerten (z. B. negative Temperaturen) behoben\nIntegrationstestfälle und Ventcube-Mockserver hinzugefügt\nVerbesserte Codequalität (ESLint)\nHinzugefügt (Release-Skript) [https://github.com/AlCalzone/release-script], um den Build-Prozess zu standardisieren",
-                "ru": "Исправлены ошибки с отрицательными значениями функции (например, отрицательные температуры)\nДобавлены тестовые примеры интеграции и моксервер Ventcube.\nПовышенное качество кода (ESLint)\nДобавлен (релиз-скрипт) [https://github.com/AlCalzone/release-script] для стандартизации процесса сборки",
-                "pt": "Erros corrigidos com valores de função negativos (por exemplo, temperaturas negativas)\nAdicionados os casos de teste de integração e o Ventcube mockserver\nQualidade de código aprimorada (ESLint)\nAdicionado (script de lançamento) [https://github.com/AlCalzone/release-script] para padronizar o processo de compilação",
-                "nl": "Bugs opgelost met negatieve functiewaarden (bijv. Negatieve temperaturen)\nIntegratietestcases en Ventcube-mockserver toegevoegd\nVerbeterde codekwaliteit (ESLint)\nToegevoegd (release-script) [https://github.com/AlCalzone/release-script] om het bouwproces te standaardiseren",
-                "fr": "Correction de bugs avec des valeurs de fonction négatives (par exemple des températures négatives)\nAjout de tests d'intégration et de mockserver Ventcube\nAmélioration de la qualité du code (ESLint)\nAjouté (release-script) [https://github.com/AlCalzone/release-script] pour standartize le processus de construction",
-                "it": "Risolti bug con valori di funzione negativi (es. Temperature negative)\nAggiunti casi di test di integrazione e mockserver di Ventcube\nQualità del codice migliorata (ESLint)\nAggiunto (release-script) [https://github.com/AlCalzone/release-script] per standardizzare il processo di compilazione",
-                "es": "Errores corregidos con valores de función negativos (por ejemplo, temperaturas negativas)\nSe agregaron casos de prueba de integración y Ventcube mockserver\nCalidad de código mejorada (ESLint)\nSe agregó (release-script) [https://github.com/AlCalzone/release-script] para estandarizar el proceso de compilación",
-                "pl": "Naprawiono błędy z ujemnymi wartościami funkcji (np. Ujemne temperatury)\nDodano testy integracji i mockerver Ventcube\nPoprawiona jakość kodu (ESLint)\nDodano (release-script) [https://github.com/AlCalzone/release-script] w celu ujednolicenia procesu budowania",
-                "zh-cn": "修复了带有负函数值的错误（例如负温度）\n添加了集成测试用例和Ventcube模拟服务器\n改进的代码质量（ESLint）\n添加了（release-script）[https://github.com/AlCalzone/release-script]以标准化构建过程"
-            },
-            "1.1.1": {
-                "en": "Minor performance improvements",
-                "de": "Kleinere Leistungsverbesserungen",
-                "ru": "Незначительные улучшения производительности",
-                "pt": "Pequenas melhorias de desempenho",
-                "nl": "Kleine prestatieverbeteringen",
-                "fr": "Améliorations mineures des performances",
-                "it": "Piccoli miglioramenti delle prestazioni",
-                "es": "Mejoras de rendimiento menores",
-                "pl": "Drobne ulepszenia wydajności",
-                "zh-cn": "轻微的性能改进"
-            }
-        },
-        "titleLang": {
-            "en": "Schwoerer Ventcube",
-            "de": "Schwoerer Ventcube",
-            "ru": "Schwoerer Ventcube",
-            "pt": "Schwoerer Ventcube",
-            "nl": "Schwoerer Ventcube",
-            "fr": "Schwoerer Ventcube",
-            "it": "Schwoerer Ventcube",
-            "es": "Schwoerer Ventcube",
-            "pl": "Schwoerer Ventcube",
-            "uk": "Schwoerer Ventcube",
-            "zh-cn": "Schwoerer Ventcube"
-        },
-        "desc": {
-            "en": "Adapter for Schwoererhaus Ventcube system",
-            "de": "Adapter für Schwoererhaus Ventcube System",
-            "ru": "Адаптер для системы Schwoererhaus Ventcube",
-            "pt": "Adaptador para sistema Schwoererhaus Ventcube",
-            "nl": "Adapter voor Schwoererhaus Ventcube-systeem",
-            "fr": "Adaptateur pour système Schwoererhaus Ventcube",
-            "it": "Adattatore per sistema Schwoererhaus Ventcube",
-            "es": "Adaptador para sistema Schwoererhaus Ventcube",
-            "pl": "Adapter do systemu Schwoererhaus Ventcube",
-            "uk": "Адаптер для системи Schwoerhaus Ventcube",
-            "zh-cn": "Schwoererhaus Ventcube系统适配器"
-        },
-        "authors": [
-            "Excodibur <non@existant.com>"
-        ],
-        "keywords": [
-            "Schwoererhaus"
-        ],
-        "licenseInformation": {
-            "license": "MIT",
-            "type": "free"
-        },
-        "platform": "Javascript/Node.js",
-        "icon": "schwoerer-ventcube.png",
-        "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/Excodibur/ioBroker.schwoerer-ventcube/master/admin/schwoerer-ventcube.png",
-        "readme": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/master/README.md",
-        "loglevel": "info",
-        "mode": "daemon",
-        "type": "climate-control",
-        "compact": true,
-        "connectionType": "local",
-        "dataSource": "poll",
-        "adminUI": {
-            "config": "json"
-        },
-        "jsonConfig": true,
-        "tier": 2,
-        "dependencies": [
-            {
-                "js-controller": ">=5.0.19"
-            }
-        ]
+  "common": {
+    "name": "schwoerer-ventcube",
+    "version": "1.4.2",
+    "news": {
+      "1.4.2": {
+        "en": "Removed test configuration from default adapter values",
+        "de": "Testkonfiguration aus Standardadapterwerten entfernt",
+        "ru": "Удалена тестовая конфигурация из значений адаптера по умолчанию",
+        "pt": "Removida a configuração de teste dos valores padrão do adaptador",
+        "nl": "Testconfiguratie verwijderd uit standaard adapterwaarden",
+        "fr": "Suppression de la configuration de test des valeurs d'adaptateur par défaut",
+        "it": "Rimossa la configurazione di prova dai valori di default dell'adattatore",
+        "es": "Se eliminó la configuración de prueba de los valores predeterminados del adaptador.",
+        "pl": "Usunięto konfigurację testową z domyślnych wartości adaptera",
+        "uk": "Видалити конфігурацію тесту з значень адаптера за замовчуванням",
+        "zh-cn": "从默认适配器值中删除了测试配置"
+      },
+      "1.4.1": {
+        "en": "Corrected Modbus address for ***T6*** measurement (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAdded scheduling priority ***Tier 2*** (introduced with JS-Controller 3.3.0)\nadded tests for Node.js 16 Support",
+        "de": "Korrigierte Modbus-Adresse für ***T6***-Messung (Issue #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanungspriorität ***Tier 2*** hinzugefügt (eingeführt mit JS-Controller 3.3.0)\nTests für Node.js 16 Support hinzugefügt",
+        "ru": "Исправленный адрес Modbus для измерения ***T6*** (выпуск № 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nДобавлен приоритет планирования ***Tier 2*** (введен в JS-Controller 3.3.0) \nдобавлены тесты для поддержки Node.js 16",
+        "pt": "Endereço Modbus corrigido para medição ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nAdicionada prioridade de agendamento ***Camada 2*** (introduzida com JS-Controller 3.3.0) \ntestes adicionados para suporte Node.js 16",
+        "nl": "Gecorrigeerd Modbus-adres voor ***T6***-meting (probleem #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nPlanningsprioriteit toegevoegd ***Tier 2*** (geïntroduceerd met JS-Controller 3.3.0)\ntoegevoegde tests voor Node.js 16-ondersteuning",
+        "fr": "Adresse Modbus corrigée pour la mesure ***T6*** (problème #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAjout de la priorité de planification ***Tier 2*** (introduit avec JS-Controller 3.3.0)\ntests ajoutés pour la prise en charge de Node.js 16",
+        "it": "Indirizzo Modbus corretto per la misurazione ***T6*** (edizione #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nAggiunta priorità di pianificazione ***Tier 2*** (introdotto con JS-Controller 3.3.0)\ntest aggiunti per Node.js 16 Support",
+        "es": "Se corrigió la dirección Modbus para la medición ***T6*** (Problema # 60) [https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR # 61) [https:// github .com / Excodibur / ioBroker.schwoerer-ventcube / pull / 61] \nPrioridad de programación agregada ***Nivel 2*** (introducido con JS-Controller 3.3.0) \npruebas agregadas para el soporte de Node.js 16",
+        "pl": "Poprawiony adres Modbus dla pomiaru ***T6*** (Wydanie #60)[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60], (PR #61)[https://github .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\nDodano priorytet planowania ***Poziom 2*** (wprowadzony z JS-Controller 3.3.0)\ndodane testy obsługi Node.js 16",
+        "zh-cn": "修正 ***T6*** 测量的 Modbus 地址（问题 #60）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60]，（PR #61）[https://github.com/Excodibur/ioBroker.schwoerer-ventcube/issues/60] .com/Excodibur/ioBroker.schwoerer-ventcube/pull/61]\n添加调度优先级***Tier 2***（JS-Controller 3.3.0引入）\n添加了对 Node.js 16 支持的测试"
+      },
+      "1.4.0": {
+        "en": "Added Admin 5 support",
+        "de": "Admin 5-Unterstützung hinzugefügt",
+        "ru": "Добавлена поддержка Admin 5.",
+        "pt": "Adicionado suporte Admin 5",
+        "nl": "Ondersteuning toegevoegd voor Admin 5",
+        "fr": "Ajout de la prise en charge d'Admin 5",
+        "it": "Aggiunto supporto per Admin 5",
+        "es": "Se agregó compatibilidad con Admin 5",
+        "pl": "Dodano obsługę administratora 5",
+        "zh-cn": "添加了Admin 5支持"
+      },
+      "1.3.0": {
+        "en": "Added new parameter ***request timeout***\nAdded info channel to inform about adapter status\nRedefined state roles to describe available data better\nImprovements to Adapter termination process",
+        "de": "Neuer Parameter ***Anforderungszeitlimit*** hinzugefügt \nInfokanal hinzugefügt, um über den Adapterstatus zu informieren\nStatusrollen neu definiert, um verfügbare Daten besser zu beschreiben\nVerbesserungen beim Beenden des Adapters",
+        "ru": "Добавлен новый параметр ***таймаут запроса*** \nДобавлен информационный канал для информирования о статусе адаптера\nПереопределены роли состояний для лучшего описания доступных данных\nУлучшения в процессе завершения работы адаптера",
+        "pt": "Adicionado novo parâmetro ***tempo limite de solicitação*** \nAdicionado canal de informações para informar sobre o status do adaptador\nFunções de estado redefinidas para descrever melhor os dados disponíveis\nMelhorias no processo de terminação do adaptador",
+        "nl": "Nieuwe parameter toegevoegd ***time-out verzoek*** \nInfokanaal toegevoegd om te informeren over de adapterstatus\nOpnieuw gedefinieerde statusrollen om beschikbare gegevens beter te beschrijven\nVerbeteringen aan het beëindigingsproces van de adapter",
+        "fr": "Ajout d'un nouveau paramètre ***timeout de la demande*** \nAjout d'un canal d'information pour informer sur l'état de l'adaptateur\nRôles d'état redéfinis pour mieux décrire les données disponibles\nAméliorations du processus de terminaison de l'adaptateur",
+        "it": "Aggiunto nuovo parametro ***timeout richiesta*** \nAggiunto canale informativo per informare sullo stato dell'adattatore\nRuoli di stato ridefiniti per descrivere meglio i dati disponibili\nMiglioramenti al processo di terminazione dell'adattatore",
+        "es": "Se agregó un nuevo parámetro ***tiempo de espera de solicitud*** \nCanal de información agregado para informar sobre el estado del adaptador\nRoles estatales redefinidos para describir mejor los datos disponibles\nMejoras en el proceso de terminación del adaptador",
+        "pl": "Dodano nowy parametr ***limit czasu żądania*** \nDodano kanał informacyjny informujący o stanie karty\nPonownie zdefiniowano role stanu, aby lepiej opisać dostępne dane\nUlepszenia procesu zakończenia adaptera",
+        "zh-cn": "添加了新参数***请求超时***\n添加了信息通道以通知适配器状态\n重新定义状态角色以更好地描述可用数据\n适配器终止过程的改进"
+      },
+      "1.2.0": {
+        "en": "Added missing reconnect behaviour in case Ventcube is not reachable\nAdded connection settings for new reconnect-behaviour\nReworked layout ouf settings page\nFixed mock-server connection handling and Windows integration tests\nMoved integration tests (windows, Linux, OSX) from Travis to Github Actions",
+        "de": "Fehlendes Wiederverbindungsverhalten für den Fall hinzugefügt, dass Ventcube nicht erreichbar ist\nVerbindungseinstellungen für neues Wiederverbindungsverhalten hinzugefügt\nÜberarbeitetes Layout der Einstellungsseite\nMock-Server-Verbindungsbehandlung und Windows-Integrationstests behoben\nDie Integrationstests (Windows, Linux, OSX) wurden von Travis nach Github Actions verschoben",
+        "ru": "Добавлено отсутствующее поведение при повторном подключении в случае, если Ventcube недоступен.\nДобавлены настройки подключения для нового поведения при повторном подключении\nПереработан макет страницы настроек ouf\nИсправлена обработка соединения с макетом сервера и тесты интеграции Windows\nИнтеграционные тесты (windows, Linux, OSX) перенесены из Travis в Github Actions.",
+        "pt": "Adicionado comportamento de reconexão ausente no caso de Ventcube não estar acessível\nAdicionadas configurações de conexão para novo comportamento de reconexão\nPágina de configurações de layout refeita ouf\nManipulação de conexão de servidor simulado corrigida e testes de integração do Windows\nTestes de integração movidos (Windows, Linux, OSX) do Travis para o Github Actions",
+        "nl": "Ontbrekend herverbindingsgedrag toegevoegd voor het geval Ventcube niet bereikbaar is\nVerbindingsinstellingen toegevoegd voor nieuw herverbindingsgedrag\nHerwerkte layout van instellingenpagina\nVaste afhandeling van mock-server-verbindingen en Windows-integratietests\nIntegratietests (Windows, Linux, OSX) verplaatst van Travis naar Github-acties",
+        "fr": "Ajout d'un comportement de reconnexion manquant au cas où Ventcube ne serait pas accessible\nAjout des paramètres de connexion pour le nouveau comportement de reconnexion\nPage des paramètres de la mise en page retravaillée\nCorrection de la gestion des connexions au serveur simulé et des tests d'intégration Windows\nDéplacement des tests d'intégration (Windows, Linux, OSX) de Travis vers Github Actions",
+        "it": "Aggiunto comportamento di riconnessione mancante nel caso in cui Ventcube non sia raggiungibile\nAggiunte impostazioni di connessione per un nuovo comportamento di riconnessione\nPagina delle impostazioni del layout rielaborato\nRisolto il problema con la gestione della connessione mock-server e i test di integrazione di Windows\nTest di integrazione spostati (Windows, Linux, OSX) da Travis a Github Actions",
+        "es": "Se agregó un comportamiento de reconexión faltante en caso de que Ventcube no sea accesible\nSe agregaron configuraciones de conexión para un nuevo comportamiento de reconexión\nDiseño reelaborado de la página de configuración de ouf\nManejo de conexión de servidor simulado fijo y pruebas de integración de Windows\nPruebas de integración movidas (Windows, Linux, OSX) de Travis a Acciones de Github",
+        "pl": "Dodano brakujące zachowanie ponownego połączenia w przypadku, gdy Ventcube jest nieosiągalny\nDodano ustawienia połączenia dla nowego zachowania ponownego łączenia\nPrzerobiony układ strony ustawień\nNaprawiono obsługę połączenia z serwerem próbnym i testy integracji systemu Windows\nPrzeniesiono testy integracji (Windows, Linux, OSX) z Travis do Github Actions",
+        "zh-cn": "在无法访问Ventcube的情况下添加了丢失的重新连接行为\n为新的重新连接行为添加了连接设置\n重做的版面设置页面\n修复了模拟服务器连接处理和Windows集成测试\n将集成测试（Windows，Linux，OSX）从Travis移至Github Actions"
+      },
+      "1.1.2": {
+        "en": "Fixed bugs with negative function values (e.g. negative temperatures)\nAdded integration testcases and Ventcube mockserver\nImproved code quality (ESLint)\nAdded (release-script)[https://github.com/AlCalzone/release-script] to standartize build process",
+        "de": "Fehler mit negativen Funktionswerten (z. B. negative Temperaturen) behoben\nIntegrationstestfälle und Ventcube-Mockserver hinzugefügt\nVerbesserte Codequalität (ESLint)\nHinzugefügt (Release-Skript) [https://github.com/AlCalzone/release-script], um den Build-Prozess zu standardisieren",
+        "ru": "Исправлены ошибки с отрицательными значениями функции (например, отрицательные температуры)\nДобавлены тестовые примеры интеграции и моксервер Ventcube.\nПовышенное качество кода (ESLint)\nДобавлен (релиз-скрипт) [https://github.com/AlCalzone/release-script] для стандартизации процесса сборки",
+        "pt": "Erros corrigidos com valores de função negativos (por exemplo, temperaturas negativas)\nAdicionados os casos de teste de integração e o Ventcube mockserver\nQualidade de código aprimorada (ESLint)\nAdicionado (script de lançamento) [https://github.com/AlCalzone/release-script] para padronizar o processo de compilação",
+        "nl": "Bugs opgelost met negatieve functiewaarden (bijv. Negatieve temperaturen)\nIntegratietestcases en Ventcube-mockserver toegevoegd\nVerbeterde codekwaliteit (ESLint)\nToegevoegd (release-script) [https://github.com/AlCalzone/release-script] om het bouwproces te standaardiseren",
+        "fr": "Correction de bugs avec des valeurs de fonction négatives (par exemple des températures négatives)\nAjout de tests d'intégration et de mockserver Ventcube\nAmélioration de la qualité du code (ESLint)\nAjouté (release-script) [https://github.com/AlCalzone/release-script] pour standartize le processus de construction",
+        "it": "Risolti bug con valori di funzione negativi (es. Temperature negative)\nAggiunti casi di test di integrazione e mockserver di Ventcube\nQualità del codice migliorata (ESLint)\nAggiunto (release-script) [https://github.com/AlCalzone/release-script] per standardizzare il processo di compilazione",
+        "es": "Errores corregidos con valores de función negativos (por ejemplo, temperaturas negativas)\nSe agregaron casos de prueba de integración y Ventcube mockserver\nCalidad de código mejorada (ESLint)\nSe agregó (release-script) [https://github.com/AlCalzone/release-script] para estandarizar el proceso de compilación",
+        "pl": "Naprawiono błędy z ujemnymi wartościami funkcji (np. Ujemne temperatury)\nDodano testy integracji i mockerver Ventcube\nPoprawiona jakość kodu (ESLint)\nDodano (release-script) [https://github.com/AlCalzone/release-script] w celu ujednolicenia procesu budowania",
+        "zh-cn": "修复了带有负函数值的错误（例如负温度）\n添加了集成测试用例和Ventcube模拟服务器\n改进的代码质量（ESLint）\n添加了（release-script）[https://github.com/AlCalzone/release-script]以标准化构建过程"
+      },
+      "1.1.1": {
+        "en": "Minor performance improvements",
+        "de": "Kleinere Leistungsverbesserungen",
+        "ru": "Незначительные улучшения производительности",
+        "pt": "Pequenas melhorias de desempenho",
+        "nl": "Kleine prestatieverbeteringen",
+        "fr": "Améliorations mineures des performances",
+        "it": "Piccoli miglioramenti delle prestazioni",
+        "es": "Mejoras de rendimiento menores",
+        "pl": "Drobne ulepszenia wydajności",
+        "zh-cn": "轻微的性能改进"
+      }
     },
-    "native": {
-        "server": "HERMES-LT",
-        "port": 502,
-        "interval": 30,
-        "advancedfunctions": true,
-        "reconnectattempts": 10,
-        "reconnectdelayms": 10000,
-        "requesttimeoutms": 5000
+    "titleLang": {
+      "en": "Schwoerer Ventcube",
+      "de": "Schwoerer Ventcube",
+      "ru": "Schwoerer Ventcube",
+      "pt": "Schwoerer Ventcube",
+      "nl": "Schwoerer Ventcube",
+      "fr": "Schwoerer Ventcube",
+      "it": "Schwoerer Ventcube",
+      "es": "Schwoerer Ventcube",
+      "pl": "Schwoerer Ventcube",
+      "uk": "Schwoerer Ventcube",
+      "zh-cn": "Schwoerer Ventcube"
     },
-    "objects": [],
-    "instanceObjects": [
-        {
-            "_id": "info",
-            "type": "channel",
-            "common": {
-                "name": "Adapter-Information"
-            },
-            "native": {}
-        },
-        {
-            "_id": "info.connection",
-            "type": "state",
-            "common": {
-                "role": "indicator.connected",
-                "name": "Whether the adapter is connected to Ventcube (Modbus-server)",
-                "type": "boolean",
-                "read": true,
-                "write": false,
-                "def": false
-            },
-            "native": {}
-        }
+    "desc": {
+      "en": "Adapter for Schwoererhaus Ventcube system",
+      "de": "Adapter für Schwoererhaus Ventcube System",
+      "ru": "Адаптер для системы Schwoererhaus Ventcube",
+      "pt": "Adaptador para sistema Schwoererhaus Ventcube",
+      "nl": "Adapter voor Schwoererhaus Ventcube-systeem",
+      "fr": "Adaptateur pour système Schwoererhaus Ventcube",
+      "it": "Adattatore per sistema Schwoererhaus Ventcube",
+      "es": "Adaptador para sistema Schwoererhaus Ventcube",
+      "pl": "Adapter do systemu Schwoererhaus Ventcube",
+      "uk": "Адаптер для системи Schwoerhaus Ventcube",
+      "zh-cn": "Schwoererhaus Ventcube系统适配器"
+    },
+    "authors": [
+      "Excodibur <non@existant.com>"
+    ],
+    "keywords": [
+      "Schwoererhaus"
+    ],
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "schwoerer-ventcube.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/Excodibur/ioBroker.schwoerer-ventcube/master/admin/schwoerer-ventcube.png",
+    "readme": "https://github.com/Excodibur/ioBroker.schwoerer-ventcube/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "climate-control",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "json"
+    },
+    "jsonConfig": true,
+    "tier": 2,
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
     ]
+  },
+  "native": {
+    "server": "HERMES-LT",
+    "port": 502,
+    "interval": 30,
+    "advancedfunctions": true,
+    "reconnectattempts": 10,
+    "reconnectdelayms": 10000,
+    "requesttimeoutms": 5000
+  },
+  "objects": [],
+  "instanceObjects": [
+    {
+      "_id": "info",
+      "type": "channel",
+      "common": {
+        "name": "Adapter-Information"
+      },
+      "native": {}
+    },
+    {
+      "_id": "info.connection",
+      "type": "state",
+      "common": {
+        "role": "indicator.connected",
+        "name": "Whether the adapter is connected to Ventcube (Modbus-server)",
+        "type": "boolean",
+        "read": true,
+        "write": false,
+        "def": false
+      },
+      "native": {}
+    }
+  ]
 }
